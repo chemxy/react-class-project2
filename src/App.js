@@ -1,11 +1,14 @@
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import IndexPage from "./pages/IndexPage";
+import ProjectDetail from "./components/ProjectDetail";
+
+const router = createBrowserRouter([
+    {path: '', element: <IndexPage/>},
+])
+
 
 function App() {
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return <RouterProvider router={router}/>;
 }
 
 export default App;

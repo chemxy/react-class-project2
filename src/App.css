@@ -1,0 +1,95 @@
+:root {
+    --lightwhite: #fafafa;
+    --lightblack: #131313;
+    --top-margin: 50px;
+    --top-inner-margin: 100px;
+}
+
+.App {
+    background-color: var(--lightwhite);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.text-lower {
+    text-transform: lowercase;
+}
+
+.text-cap {
+    text-transform: capitalize;
+}
+
+.project-detial-container {
+    margin-bottom: 12px;
+}
+
+.left {
+    background-color: var(--lightblack);
+    width: 20vw;
+    height: 100vh;
+    margin-top: var(--top-margin);
+    margin-right: 2vw;
+    border-top-right-radius: 28px;
+    min-width: 400px;
+    color: var(--lightwhite);
+}
+
+#project-list-section {
+    margin-left: 15%;
+    margin-top: var(--top-inner-margin);
+}
+
+.right {
+    width: 78vw;
+    height: 100vh;
+    margin-top: var(--top-margin);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.primary-button {
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: var(--lightwhite);
+    color: var(--lightblack);
+}
+
+.primary-button:hover {
+    background-color: lightgrey;
+}
+
+#project-list-container {
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+#project-detail-container {
+    margin-top: var(--top-inner-margin);
+}
+
+.project-detail-button {
+    background-color: var(--lightblack);
+    color: var(--lightwhite);
+    border: none;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.project-detail-button:hover {
+    text-decoration: underline;
+}
