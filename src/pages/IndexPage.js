@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProjectContext } from "../store/ProjectContext";
 import ProjectList from "../components/ProjectList";
 import '../App.css';
@@ -6,18 +6,18 @@ import { NavLink, Outlet } from "react-router-dom";
 
 export default function IndexPage() {
 
-    const [projects, setProjects] = useState([{
-        id: 'fds12213',
-        name: 'sample1',
-        dueDate: '121',
-        description: 'sadsadsadsadsa'
-    }, {
-        id: 'fds12214',
-        name: 'sample2',
-        dueDate: '1211',
-        description: 'sadsadsadsadsa'
-    }
-    ]);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3200/projects').then(res=>{
+            if(!res.ok){
+                throw new Error("could not get projects from backend");
+            }
+            return res.json();
+        }).then(resData=>{
+            setProjects(resData.projects);
+        })
+    }, []);
 
     function addProject(project) {
         setProjects((prevProjects) => [...prevProjects, project]);
