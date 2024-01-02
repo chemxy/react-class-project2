@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ProjectContext } from "../store/ProjectContext";
 
 export default function AddProject() {
 
-    // const projectContext = useContext(ProjectContext);
+    const projectContext = useContext(ProjectContext);
     const navigate = useNavigate();
 
     function onAddProject(event) {         //TODO handle empty / invalid input
@@ -12,7 +14,7 @@ export default function AddProject() {
         const newProjectId = Math.random().toString(36).replace('.', '');
         newProject.id = newProjectId;
         // console.log(`add project - id: ${newProjectId}`)
-        // projectContext.addItem(newProject); //TODO commented out - this uses react context api
+        projectContext.addItem(newProject); //sync with project context
 
         fetch('http://localhost:3200/project', {
             method: 'POST',
