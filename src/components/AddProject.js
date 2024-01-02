@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ProjectContext } from "../store/ProjectContext";
+import { json } from "react-router-dom";
 
 export default function AddProject() {
 
@@ -11,8 +12,24 @@ export default function AddProject() {
         const newProject = Object.fromEntries(fd.entries());
         const newProjectId = Math.random().toString(36).replace('.', '');
         newProject.id = newProjectId;
+        console.log(newProject)
         console.log(`add project - id: ${newProjectId}`)
         projectContext.addItem(newProject);
+
+        fetch('http://localhost:3200/project', {
+            method: 'POST',
+            body: JSON.stringify(newProject),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error("could not add projects to backend");
+            } else {
+                console.log(`added project - id: ${newProjectId}`);
+            }
+        })
+
     }
 
     return <div>

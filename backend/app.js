@@ -47,10 +47,14 @@ app.get('/projects', async (req, res) => {
 });
 
 app.post('/project', async (req, res) => {
+    console.log("add project")
     const data = req.body;
+    if (!data)
+        res.status(500).json({message: 'empty payload'})
+    console.log(data)
     const fileContent = await fs.readFile('./data/projects.json');
     const projectsData = JSON.parse(fileContent);
-    projectsData.unshift({...data});
+    projectsData.push({...data});
     await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
     res.status(200).json({message: 'project saved.'});
 });
