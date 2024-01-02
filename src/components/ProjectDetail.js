@@ -1,20 +1,20 @@
 import '../App.css';
-import img from "../assets/no-projects.png";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { ProjectContext } from "../store/ProjectContext";
 
-export default function ProjectDetail({project}) {
+export default function ProjectDetail() {
 
-    if (project == undefined) {
-        return <div>
-            <img src={img} alt="no projects"/>
+    const projectContext = useContext(ProjectContext);
+    const params = useParams();
+    const projectId = params.projectId;
+    const project = projectContext.items.find((project) => project.id === projectId)
+
+    return (
+        <div>
+            <h1>{project.name}</h1>
+            <h1>{project.dueDate}</h1>
+            <p>{project.description}</p>
         </div>
-    } else {
-        return (
-            <div>
-                <h1>{project.name}</h1>
-                <h1>{project.dueDate}</h1>
-                <p>{project.description}</p>
-            </div>
-        );
-    }
+    );
 }

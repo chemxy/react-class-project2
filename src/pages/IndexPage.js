@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ProjectContext } from "../store/ProjectContext";
 import ProjectList from "../components/ProjectList";
-import ProjectDetail from "../components/ProjectDetail";
 import '../App.css';
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function IndexPage() {
 
@@ -26,8 +26,18 @@ export default function IndexPage() {
         setActiveProject(selectedProject);
     }
 
+    function addProject(project) {
+        console.log("add project")
+        setProjects((prevProjects) => [...prevProjects, project]);
+    }
+
+    const ProjectCtx = {
+        items: projects,
+        addProject: addProject,
+    }
+
     return (
-        <ProjectContext.Provider value={projects}>
+        <ProjectContext.Provider value={ProjectCtx}>
             <div className="App flex-row">
                 <div className="left">
                     <div id="project-list-section">
@@ -35,7 +45,9 @@ export default function IndexPage() {
                             <h1 className="text-upper">your projects</h1>
                         </div>
                         <div>
-                            <button className="primary-button text-cap">+ add project</button>
+                            <NavLink to="project/add">
+                                <button className="primary-button text-cap">+ add project</button>
+                            </NavLink>
                         </div>
                         <div id="project-list-container" className="text-cap">
                             <ProjectList selectProject={selectProject}></ProjectList>
@@ -45,7 +57,7 @@ export default function IndexPage() {
                 </div>
                 <div className="right">
                     <div id="project-detail-container">
-                        <ProjectDetail project={activeProject}></ProjectDetail>
+                        <Outlet></Outlet>
                     </div>
 
                 </div>
