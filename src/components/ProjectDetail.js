@@ -13,7 +13,7 @@ export default function ProjectDetail() {
     return (
         <div>
             <h1>{project.name}</h1>
-            <h1>{project.dueDate}</h1>
+            <h3>{project.dueDate}</h3>
             <p>{project.description}</p>
         </div>
     );

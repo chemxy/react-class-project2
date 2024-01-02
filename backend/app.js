@@ -46,6 +46,14 @@ app.get('/projects', async (req, res) => {
     res.status(200).json({projects: projectsData});
 });
 
+app.post('/project', async (req, res) => {
+    const data = req.body;
+    const fileContent = await fs.readFile('./data/projects.json');
+    const projectsData = JSON.parse(fileContent);
+    projectsData.unshift({...data});
+    await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
+    res.status(200).json({message: 'project saved.'});
+});
 
 // 404
 app.use((req, res, next) => {

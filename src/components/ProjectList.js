@@ -9,8 +9,6 @@ export default function ProjectList({selectProject}) {
     const navigate = useNavigate();
 
     function onSelectProject(id) {
-        // console.log(id);
-        // selectProject(id);
         navigate(`project/${id}`);
     }
 
