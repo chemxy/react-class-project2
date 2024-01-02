@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { ProjectContext } from "../store/ProjectContext";
-import { json } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 export default function AddProject() {
 
-    const projectContext = useContext(ProjectContext);
+    // const projectContext = useContext(ProjectContext);
+    const navigate = useNavigate();
 
     function onAddProject(event) {
         event.preventDefault();
@@ -12,9 +13,8 @@ export default function AddProject() {
         const newProject = Object.fromEntries(fd.entries());
         const newProjectId = Math.random().toString(36).replace('.', '');
         newProject.id = newProjectId;
-        console.log(newProject)
-        console.log(`add project - id: ${newProjectId}`)
-        projectContext.addItem(newProject);
+        // console.log(`add project - id: ${newProjectId}`)
+        // projectContext.addItem(newProject);
 
         fetch('http://localhost:3200/project', {
             method: 'POST',
@@ -27,7 +27,11 @@ export default function AddProject() {
                 throw new Error("could not add projects to backend");
             } else {
                 console.log(`added project - id: ${newProjectId}`);
+                navigate('/');
             }
+        }).catch(error => {
+            console.log(error);
+            throw new Error("could not add projects to backend");
         })
 
     }
