@@ -18,22 +18,14 @@ export default function IndexPage() {
         description: 'sadsadsadsadsa'
     }
     ]);
-    const [activeProject, setActiveProject] = useState(undefined);
-
-    function selectProject(id) {
-        console.log("set active project id: " + id)
-        const selectedProject = projects.find((project) => id === project.id)
-        setActiveProject(selectedProject);
-    }
 
     function addProject(project) {
-        console.log("add project")
         setProjects((prevProjects) => [...prevProjects, project]);
     }
 
     const ProjectCtx = {
         items: projects,
-        addProject: addProject,
+        addItem: addProject,
     }
 
     return (
@@ -50,7 +42,7 @@ export default function IndexPage() {
                             </NavLink>
                         </div>
                         <div id="project-list-container" className="text-cap">
-                            <ProjectList selectProject={selectProject}></ProjectList>
+                            <ProjectList></ProjectList>
                         </div>
                     </div>
 

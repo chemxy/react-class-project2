@@ -63,6 +63,7 @@ button:hover {
 
 .primary-button {
     padding: 15px 25px;
+    border: none;
     border-radius: 10px;
     font-size: 20px;
     background-color: var(--lightwhite);
@@ -71,6 +72,22 @@ button:hover {
 
 .primary-button:hover {
     background-color: lightgrey;
+}
+
+.secondary-button {
+    width: 120px;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: var(--lightblack);
+    color: var(--lightwhite);
+    margin-right: 2rem;
+}
+
+.secondary-button:hover {
+    /*background-color: darkgray;*/
+    text-decoration: underline;
 }
 
 #project-list-container {
@@ -92,4 +109,26 @@ button:hover {
 
 .project-detail-button:hover {
     text-decoration: underline;
+}
+
+.input-group{
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.input-label{
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input-text{
+    width: 40rem;
+    height: 30px;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+#input-description{
+    min-height: 100px;
 }
