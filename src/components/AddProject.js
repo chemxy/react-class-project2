@@ -14,7 +14,7 @@ export default function AddProject() {
         const newProjectId = Math.random().toString(36).replace('.', '');
         newProject.id = newProjectId;
         // console.log(`add project - id: ${newProjectId}`)
-        // projectContext.addItem(newProject);
+        // projectContext.addItem(newProject); //TODO commented out - this uses react context api
 
         fetch('http://localhost:3200/project', {
             method: 'POST',
