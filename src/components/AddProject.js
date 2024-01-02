@@ -7,7 +7,7 @@ export default function AddProject() {
     // const projectContext = useContext(ProjectContext);
     const navigate = useNavigate();
 
-    function onAddProject(event) {
+    function onAddProject(event) {         //TODO handle empty / invalid input
         event.preventDefault();
         const fd = new FormData(event.target);
         const newProject = Object.fromEntries(fd.entries());
