@@ -1,6 +1,4 @@
-import { useContext } from "react";
-import { ProjectContext } from "../store/ProjectContext";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProject() {
 
