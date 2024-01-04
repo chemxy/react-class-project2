@@ -8,6 +8,7 @@ export default function ProjectList({selectProject}) {
     const projects = useContext(ProjectContext)
     const navigate = useNavigate();
 
+
     function onSelectProject(id) {
         navigate(`project/${id}`);
     }

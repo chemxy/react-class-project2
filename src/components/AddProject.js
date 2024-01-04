@@ -1,39 +1,17 @@
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../store/ProjectContext";
 
 export default function AddProject() {
 
     const projectContext = useContext(ProjectContext);
-    const navigate = useNavigate();
 
     function onAddProject(event) {         //TODO handle empty / invalid input
         event.preventDefault();
         const fd = new FormData(event.target);
         const newProject = Object.fromEntries(fd.entries());
-        const newProjectId = Math.random().toString(36).replace('.', '');
-        newProject.id = newProjectId;
+        newProject.id = Math.random().toString(36).replace('.', '');
         // console.log(`add project - id: ${newProjectId}`)
         projectContext.addItem(newProject); //sync with project context
-
-        fetch('http://localhost:3200/project', {
-            method: 'POST',
-            body: JSON.stringify(newProject),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            if (!res.ok) {
-                throw new Error("could not add projects to backend");
-            } else {
-                console.log(`added project - id: ${newProjectId}`);
-                navigate('/');
-            }
-        }).catch(error => {
-            console.log(error);
-            throw new Error("could not add projects to backend");
-        })
-
     }
 
     return <div>

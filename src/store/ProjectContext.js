@@ -4,4 +4,6 @@ export const ProjectContext = createContext({
     items: [],
     addItem: () => {
     },
+    deleteItem: () => {
+    }
 })
