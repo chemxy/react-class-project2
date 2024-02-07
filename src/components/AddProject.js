@@ -9,7 +9,7 @@ export default function AddProject() {
         event.preventDefault();
         const fd = new FormData(event.target);
         const newProject = Object.fromEntries(fd.entries());
-        newProject.id = Math.random().toString(36).replace('.', '');
+        // newProject.id = Math.random().toString(36).replace('.', '');
         // console.log(`add project - id: ${newProjectId}`)
         projectContext.addItem(newProject); //sync with project context
     }
