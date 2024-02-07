@@ -56,6 +56,7 @@ app.post('/project', async (req, res) => {
         console.log(data)
         const fileContent = await fs.readFile('./data/projects.json');
         const projectsData = JSON.parse(fileContent);
+        data.id = Math.random().toString(36).replace('.', '');
         projectsData.push({...data});
         await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
         res.status(200).json({message: 'project saved.'});
