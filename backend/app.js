@@ -46,9 +46,22 @@ app.get('/projects', async (req, res) => {
     res.status(200).json({projects: projectsData});
 });
 
+app.get('/projects/:projectId', async (req, res) => {
+    const projectId = req.params.projectId;
+    console.log("get projects with id " + projectId)
+    const fileContent = await fs.readFile('./data/projects.json');
+
+    const projectsData = JSON.parse(fileContent);
+
+    const project = projectsData.find((project) => project.id === projectId)
+
+    res.status(200).json({project: project});
+});
+
 app.post('/project', async (req, res) => {
     console.log("add project")
     const data = req.body;
+    console.log(data)
     if (JSON.stringify(data) === '{}') {
         console.log("invalid input data")
         res.status(500).json({message: 'empty payload'})
@@ -61,6 +74,12 @@ app.post('/project', async (req, res) => {
         await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
         res.status(200).json({message: 'project saved.'});
     }
+});
+
+app.post('/deleteproject',  (req, res) => {
+    console.log("deleting project")
+    console.log(req.body)
+    res.status(200).json({message: 'project deleted.'});
 });
 
 // 404

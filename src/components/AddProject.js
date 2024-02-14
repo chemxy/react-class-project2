@@ -44,7 +44,7 @@ export default function AddProject() {
                 </div>
             </div>
             <button type="submit" className="secondary-button text-cap">add</button>
-            <button type="submit" className="primary-button text-cap">cancel</button>
+            <button type="button" className="primary-button text-cap">cancel</button>
         </form>
     </div>
 }

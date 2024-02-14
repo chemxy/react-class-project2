@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../store/ProjectContext";
 import { useNavigate } from "react-router-dom";
 
-export default function ProjectList({selectProject}) {
+export default function ProjectList() {
 
     const projects = useContext(ProjectContext)
     const navigate = useNavigate();
