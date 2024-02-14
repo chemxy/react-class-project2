@@ -46,10 +46,37 @@ export default function IndexPage() {
     }
 
     function deleteProject(id) {
-        console.log("deleting id:" + id);
-        const newProjects = projects.filter((project) => project.id !== id);
-        console.log(newProjects)
-        // setProjects(newProjects);
+        // console.log("deleting id:" + id);
+
+        // console.log(newProjects)
+        console.log("deleting")
+        const data = {
+            id: id
+        }
+        console.log(data)
+        fetch("http://localhost:3200/deleteproject", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            console.log(res)
+            if (res.ok) {
+                console.log("project deleted.")
+                return res.json();
+            }
+
+        }).then(data => {
+            console.log(data);
+            const newProjects = projects.filter((project) => project.id !== id);
+            setProjects(newProjects);
+            navigate('/');
+        }).catch(error => {
+            console.log(error)
+        })
+
     }
 
     const ProjectCtx = {

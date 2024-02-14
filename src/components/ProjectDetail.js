@@ -1,10 +1,11 @@
 import '../App.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ProjectContext } from "../store/ProjectContext";
 
 export default function ProjectDetail() {
     const projectContext = useContext(ProjectContext);
+    const navigate = useNavigate();
     // const [project, setProject] = useState(undefined);
     const params = useParams();
     const projectId = params.projectId;
@@ -25,28 +26,31 @@ export default function ProjectDetail() {
     // }, []);
 
     function handleDelete() {
-        // projectContext.deleteItem(projectId);
-        console.log("deleting")
-        const data = {
-            id: "dsff32f2f32"
-        }
-        console.log(data)
-        fetch("http://localhost:3200/deleteproject", {
-                method: "POST",
-                body: JSON.stringify(data)
-            }
-        ).then(res => {
-            console.log(res)
-            if (res.ok) {
-                console.log("project deleted.")
-                return res.json();
-            }
-
-        }).then(data => {
-            console.log(data);
-        }).catch(error=>{
-            console.log(error)
-        })
+        projectContext.deleteItem(projectId);
+        // console.log("deleting")
+        // const data = {
+        //     id: projectId
+        // }
+        // console.log(data)
+        // fetch("http://localhost:3200/deleteproject", {
+        //         method: "POST",
+        //         body: JSON.stringify(data),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }
+        // ).then(res => {
+        //     console.log(res)
+        //     if (res.ok) {
+        //         console.log("project deleted.")
+        //         return res.json();
+        //     }
+        //
+        // }).then(data => {
+        //     console.log(data);
+        // }).catch(error => {
+        //     console.log(error)
+        // })
     }
 
     if (project) {
@@ -59,7 +63,7 @@ export default function ProjectDetail() {
             </div>
         );
     } else {
-        return <div>loading</div>
+        navigate('/');
     }
 
 }

@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken'
 // CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); // allow all domains
-    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
@@ -72,14 +72,24 @@ app.post('/project', async (req, res) => {
         data.id = Math.random().toString(36).replace('.', '');
         projectsData.push({...data});
         await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
-        res.status(200).json({message: 'project saved.'});
+        res.status(200).json({message: 'project saved.', project: data});
     }
 });
 
-app.post('/deleteproject',  (req, res) => {
+app.post('/deleteproject', async (req, res) => {
     console.log("deleting project")
-    console.log(req.body)
-    res.status(200).json({message: 'project deleted.'});
+    const data = req.body;
+    // console.log(data)
+    if (JSON.stringify(data) === '{}') {
+        console.log("invalid input data")
+        res.status(500).json({message: 'empty payload'})
+    } else {
+        const fileContent = await fs.readFile('./data/projects.json');
+        const projectsData = JSON.parse(fileContent);
+        const newProjects = projectsData.filter((project) => project.id !== data.id);
+        await fs.writeFile('./data/projects.json', JSON.stringify(newProjects));
+        res.status(200).json({message: 'project deleted.'});
+    }
 });
 
 // 404
