@@ -21,7 +21,7 @@ export default function IndexPage() {
     }, []);
 
     function addProject(project) {
-        setProjects((prevProjects) => [...prevProjects, project]);
+
         fetch('http://localhost:3200/project', {
             method: 'POST',
             body: JSON.stringify(project),
@@ -32,9 +32,13 @@ export default function IndexPage() {
             if (!res.ok) {
                 throw new Error("could not add projects to backend");
             } else {
-                console.log(`added project - id: ${project.id}`);
-                navigate('/');
+                return res.json();
+
             }
+        }).then(data => {
+            console.log(`added project - id: ${project.id}`);
+            setProjects((prevProjects) => [...prevProjects, data.project]);
+            navigate('/');
         }).catch(error => {
             console.log(error);
             throw new Error("could not add projects to backend");
