@@ -5,24 +5,24 @@ import { ProjectContext } from "../store/ProjectContext";
 
 export default function ProjectDetail() {
     const projectContext = useContext(ProjectContext);
-    const [project, setProject] = useState(undefined);
+    // const [project, setProject] = useState(undefined);
     const params = useParams();
     const projectId = params.projectId;
-    // const project = projectContext.items.find((project) => project.id === projectId)
+    const project = projectContext.items.find((project) => project.id === projectId)
 
-    useEffect(() => {
-        console.log("getting project id: " + projectId)
-        fetch('http://localhost:3200/projects/' + projectId).then(res => {
-            if (!res.ok) {
-                throw new Error("could not get projects from backend");
-            }
-            return res.json();
-        }).then(resData => {
-            console.log(resData);
-            const selectedProject = resData.project;
-            setProject(selectedProject)
-        })
-    }, []);
+    // useEffect(() => {
+    //     console.log("getting project id: " + projectId)
+    //     fetch('http://localhost:3200/projects/' + projectId).then(res => {
+    //         if (!res.ok) {
+    //             throw new Error("could not get projects from backend");
+    //         }
+    //         return res.json();
+    //     }).then(resData => {
+    //         console.log(resData);
+    //         const selectedProject = resData.project;
+    //         setProject(selectedProject)
+    //     })
+    // }, []);
 
     function handleDelete() {
         // projectContext.deleteItem(projectId);
@@ -32,10 +32,11 @@ export default function ProjectDetail() {
         }
         console.log(data)
         fetch("http://localhost:3200/deleteproject", {
-                method: "post",
+                method: "POST",
                 body: JSON.stringify(data)
             }
         ).then(res => {
+            console.log(res)
             if (res.ok) {
                 console.log("project deleted.")
                 return res.json();
@@ -43,6 +44,8 @@ export default function ProjectDetail() {
 
         }).then(data => {
             console.log(data);
+        }).catch(error=>{
+            console.log(error)
         })
     }
 
