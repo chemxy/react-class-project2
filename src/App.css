@@ -3,10 +3,24 @@
     --lightblack: #131313;
     --top-margin: 50px;
     --top-inner-margin: 100px;
+    --all-border-radius: 28px;
 }
 
 .App {
-    background-color: var(--lightwhite);
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+    align-self: center;
+    background-color: #547a8a;
+}
+
+.app-wrapper {
+    position: relative;
+    background-color: #fafafa;
+    padding: 20px;
+    width: 1386px;
+    height: 780px;
+    border-radius: var(--all-border-radius);
 }
 
 .flex-row {
@@ -31,30 +45,16 @@
     text-transform: capitalize;
 }
 
-.project-detial-container {
-    margin-bottom: 12px;
-}
-
 .left {
-    background-color: var(--lightblack);
-    width: 20vw;
-    height: 100vmax;
-    margin-top: var(--top-margin);
-    margin-right: 2vw;
-    border-top-right-radius: 28px;
-    min-width: 400px;
-    color: var(--lightwhite);
-}
-
-#project-list-section {
-    margin-left: 15%;
-    margin-top: var(--top-inner-margin);
+    background-color: #fafafa;
+    width: 15%;
+    border: 1px solid darkgray;
+    border-radius: var(--all-border-radius);
 }
 
 .right {
-    width: 78vw;
-    height: 100vmax;
-    margin-top: var(--top-margin);
+    width: 85%;
+
 }
 
 button:hover {
@@ -64,7 +64,7 @@ button:hover {
 .primary-button {
     padding: 15px 25px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--all-border-radius);
     font-size: 20px;
     background-color: var(--lightwhite);
     color: var(--lightblack);
@@ -78,7 +78,7 @@ button:hover {
     width: 120px;
     padding: 15px 25px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--all-border-radius);
     font-size: 20px;
     background-color: var(--lightblack);
     color: var(--lightwhite);
@@ -111,24 +111,38 @@ button:hover {
     text-decoration: underline;
 }
 
-.input-group{
+.input-group {
     width: 100%;
     margin-bottom: 40px;
 }
 
-.input-label{
+.input-label {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.input-text{
+.input-text {
     width: 40rem;
     height: 30px;
     margin-top: 10px;
     font-size: 18px;
 }
 
-#input-description{
+#input-description {
     min-height: 100px;
+}
+
+.navbar-wrapper {
+    /*display: flex;*/
+    /*position: relative;*/
+    /*align-content: center;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.navbar-options {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
 }

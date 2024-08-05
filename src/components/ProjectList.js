@@ -1,5 +1,5 @@
 import '../App.css';
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import { ProjectContext } from "../store/ProjectContext";
 import { useNavigate } from "react-router-dom";
 
@@ -8,16 +8,15 @@ export default function ProjectList() {
     const projects = useContext(ProjectContext)
     const navigate = useNavigate();
 
-
     function onSelectProject(id) {
-        navigate(`project/${id}`);
+        navigate(`task/${id}`);
     }
 
     return (
         <div>
-            {projects.items.map(project => <div className="project-detail-container" key={project.id}>
+            {projects.items.map(task => <div className="project-detail-container" key={task.id}>
                 <button className="project-detail-button"
-                        onClick={() => onSelectProject(project.id)}>{project.name}</button>
+                        onClick={() => onSelectProject(task.id)}>{task.title}</button>
             </div>)}
         </div>
     );

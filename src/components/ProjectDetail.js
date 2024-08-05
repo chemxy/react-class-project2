@@ -56,7 +56,7 @@ export default function ProjectDetail() {
     if (project) {
         return (
             <div>
-                <h1>{project.name}</h1>
+                <h1>{project.title}</h1>
                 <h3>{project.dueDate}</h3>
                 <p>{project.description}</p>
                 <button className="secondary-button" onClick={handleDelete}>delete</button>

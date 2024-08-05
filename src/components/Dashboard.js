@@ -1,9 +1,9 @@
 import '../App.css';
 
-export default function TaskList() {
+export default function Dashboard() {
     return (
         <div>
-
+            dashboard
         </div>
     );
 }

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { ProjectContext } from "../store/ProjectContext";
-import ProjectList from "../components/ProjectList";
+import {useEffect, useState} from "react";
+import {ProjectContext} from "../store/ProjectContext";
+import ProjectList from "./ProjectList";
 import '../App.css';
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import {NavLink, Outlet, useNavigate} from "react-router-dom";
+import NavBar from "./NavBar";
 
 export default function IndexPage() {
 
@@ -10,13 +11,14 @@ export default function IndexPage() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3200/projects').then(res => {
+        fetch('http://localhost:3200/tasks').then(res => {
             if (!res.ok) {
                 throw new Error("could not get projects from backend");
             }
             return res.json();
         }).then(resData => {
-            setProjects(resData.projects);
+            console.log(resData)
+            setProjects(resData.tasks);
         })
     }, []);
 
@@ -87,29 +89,17 @@ export default function IndexPage() {
 
     return (
         <ProjectContext.Provider value={ProjectCtx}>
-            <div className="App flex-row">
-                <div className="left">
-                    <div id="project-list-section">
-                        <div>
-                            <h1 className="text-upper">your projects</h1>
-                        </div>
-                        <div>
-                            <NavLink to="project/add">
-                                <button className="primary-button text-cap">+ add project</button>
-                            </NavLink>
-                        </div>
-                        <div id="project-list-container" className="text-cap">
-                            <ProjectList></ProjectList>
-                        </div>
+            <div className="App">
+                <div className="app-wrapper flex-row">
+                    <div className="left">
+                        <NavBar></NavBar>
                     </div>
-
-                </div>
-                <div className="right">
-                    <div id="project-detail-container">
+                    <div className="right">
                         <Outlet></Outlet>
                     </div>
-
                 </div>
+
+
             </div>
         </ProjectContext.Provider>
     );

@@ -1,17 +1,20 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import IndexPage from "./pages/IndexPage";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import IndexPage from "./components/IndexPage";
 import ProjectDetail from "./components/ProjectDetail";
 import AddProject from "./components/AddProject";
-import img from "./assets/no-projects.png";
+import Dashboard from "./components/Dashboard";
+import ProjectList from "./components/ProjectList";
 
 const router = createBrowserRouter([
     {
         path: '',
         element: <IndexPage/>,
         children: [
-            {path: '', element: <div><img src={img} alt="no projects"/></div>},
-            {path: 'project/:projectId', element: <ProjectDetail/>},
-            {path: 'project/add', element: <AddProject/>},
+            {path: '', element: <Dashboard/>},
+            {path: 'dashboard', element: <Dashboard/>},
+            {path: 'task/list', element: <ProjectList/>},
+            {path: 'task/:projectId', element: <ProjectDetail/>},
+            {path: 'task/add', element: <AddProject/>},
         ]
     },
 ])
