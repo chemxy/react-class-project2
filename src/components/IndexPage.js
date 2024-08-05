@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
 import {ProjectContext} from "../store/ProjectContext";
-import ProjectList from "./ProjectList";
 import '../App.css';
-import {NavLink, Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import NavBar from "./NavBar";
 
 export default function IndexPage() {

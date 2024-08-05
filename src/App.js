@@ -1,9 +1,9 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import IndexPage from "./components/IndexPage";
 import ProjectDetail from "./components/ProjectDetail";
-import AddProject from "./components/AddProject";
+import AddTask from "./components/AddTask";
 import Dashboard from "./components/Dashboard";
-import ProjectList from "./components/ProjectList";
+import TaskList from "./components/TaskList";
 
 const router = createBrowserRouter([
     {
@@ -12,9 +12,9 @@ const router = createBrowserRouter([
         children: [
             {path: '', element: <Dashboard/>},
             {path: 'dashboard', element: <Dashboard/>},
-            {path: 'tasks', element: <ProjectList/>},
+            {path: 'tasks', element: <TaskList/>},
             {path: 'tasks/:taskId', element: <ProjectDetail/>},
-            {path: 'tasks/add', element: <AddProject/>},
+            {path: 'tasks/add', element: <AddTask/>},
         ]
     },
 ])
