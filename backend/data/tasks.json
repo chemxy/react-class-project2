@@ -5,6 +5,7 @@
     "dueDate": "2024-01-15",
     "description": "this is a sample description for task 1",
     "status": "NEW",
+    "priority": "HIGH",
     "tags": [],
     "createdDate": "2024-03-16",
     "completionDate": "2024-04-22"
@@ -15,6 +16,7 @@
     "dueDate": "2024-02-15",
     "description": "this is a sample description for task 2",
     "status": "NEW",
+    "priority": "LOW",
     "tags": [],
     "createdDate": "2024-03-11",
     "completionDate": "2024-05-18"

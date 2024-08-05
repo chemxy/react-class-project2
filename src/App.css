@@ -1,8 +1,6 @@
 :root {
     --lightwhite: #fafafa;
     --lightblack: #131313;
-    --top-margin: 50px;
-    --top-inner-margin: 100px;
     --all-border-radius: 28px;
 }
 
@@ -95,8 +93,9 @@ button:hover {
     font-size: 24px;
 }
 
-#project-detail-container {
-    margin-top: var(--top-inner-margin);
+.project-detail-container {
+    margin-top: 20px;
+    border-bottom: 1px solid #547a8a;
 }
 
 .project-detail-button {

@@ -1,7 +1,7 @@
 import '../App.css';
 import {useContext} from "react";
 import {ProjectContext} from "../store/ProjectContext";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export default function TaskList() {
 
@@ -12,25 +12,25 @@ export default function TaskList() {
         navigate(`${id}`);
     }
 
-    function createTask(id) {
-        console.log("add task")
-        navigate(`add`);
-    }
-
     return (
         <div>
             <div>
-                <button className="text-cap" onClick={createTask}>new task</button>
+                <NavLink to="add">
+                    <button className="text-cap">new task</button>
+                </NavLink>
+
             </div>
             <div>
-                {projects.items.map(task => <div className="project-detail-container" key={task.id}>
+                {projects.items.map(task => <div className="project-detail-container flex-row" key={task.id}>
                     <button className="project-detail-button"
                             onClick={() => onSelectTask(task.id)}>
                         {task.title}
                     </button>
+                    <div>due: {task.dueDate}</div>
+                    <div>priority : {task.priority}</div>
+                    <div>status : {task.status}</div>
                 </div>)}
             </div>
-
         </div>
     );
 }

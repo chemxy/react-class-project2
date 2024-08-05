@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import {ProjectContext} from "../store/ProjectContext";
+import {NavLink} from "react-router-dom";
 
 export default function AddTask() {
 
@@ -42,7 +43,10 @@ export default function AddTask() {
                 </div>
             </div>
             <button type="submit" className="secondary-button text-cap">add</button>
-            <button type="button" className="primary-button text-cap">cancel</button>
+            <NavLink to="/tasks">
+                <button type="button" className="primary-button text-cap">cancel</button>
+            </NavLink>
+
         </form>
     </div>
 }

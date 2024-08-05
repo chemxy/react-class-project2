@@ -1,5 +1,5 @@
 import '../App.css';
-import {useNavigate, useParams} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useContext} from "react";
 import {ProjectContext} from "../store/ProjectContext";
 
@@ -41,10 +41,17 @@ export default function ProjectDetail() {
     if (task) {
         return (
             <div>
-                <h1>{task.title}</h1>
-                <h3>{task.dueDate}</h3>
-                <p>{task.description}</p>
-                <button className="secondary-button" onClick={handleDelete}>delete</button>
+                <div>
+                    <NavLink to="/tasks">
+                        <button>Back</button>
+                    </NavLink>
+                </div>
+                <div>
+                    <h1>{task.title}</h1>
+                    <h3>{task.dueDate}</h3>
+                    <p>{task.description}</p>
+                    <button className="secondary-button" onClick={handleDelete}>delete</button>
+                </div>
             </div>
         );
     } else {
