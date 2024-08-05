@@ -2,13 +2,14 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import {v4 as uuidv4} from 'uuid';
 
 const app = express();
 
 app.use(express.static('images'));
 app.use(bodyParser.json());
 
-import jwt from 'jsonwebtoken'
+const dataFile = './data/tasks.json';
 
 // CORS
 app.use((req, res, next) => {
@@ -37,29 +38,29 @@ app.use((req, res, next) => {
 //     res.status(200).json({message: 'authenticated', token: token})
 // })
 
-app.get('/projects', async (req, res) => {
-    console.log("get projects")
-    const fileContent = await fs.readFile('./data/projects.json');
+app.get('/tasks', async (req, res) => {
+    console.log("get tasks")
+    const fileContent = await fs.readFile(dataFile);
 
-    const projectsData = JSON.parse(fileContent);
+    const tasks = JSON.parse(fileContent);
 
-    res.status(200).json({projects: projectsData});
+    res.status(200).json({tasks: tasks});
 });
 
-app.get('/projects/:projectId', async (req, res) => {
-    const projectId = req.params.projectId;
-    console.log("get projects with id " + projectId)
-    const fileContent = await fs.readFile('./data/projects.json');
+app.get('/tasks/:taskId', async (req, res) => {
+    const taskId = req.params.projectId;
+    console.log("get task by id " + taskId)
+    const fileContent = await fs.readFile(dataFile);
 
-    const projectsData = JSON.parse(fileContent);
+    const tasks = JSON.parse(fileContent);
 
-    const project = projectsData.find((project) => project.id === projectId)
+    const task = tasks.find((task) => task.id === taskId)
 
-    res.status(200).json({project: project});
+    res.status(200).json({task: task});
 });
 
-app.post('/project', async (req, res) => {
-    console.log("add project")
+app.post('/newtask', async (req, res) => {
+    console.log("add task")
     const data = req.body;
     console.log(data)
     if (JSON.stringify(data) === '{}') {
@@ -67,28 +68,28 @@ app.post('/project', async (req, res) => {
         res.status(500).json({message: 'empty payload'})
     } else {
         console.log(data)
-        const fileContent = await fs.readFile('./data/projects.json');
-        const projectsData = JSON.parse(fileContent);
-        data.id = Math.random().toString(36).replace('.', '');
-        projectsData.push({...data});
-        await fs.writeFile('./data/projects.json', JSON.stringify(projectsData));
-        res.status(200).json({message: 'project saved.', project: data});
+        const fileContent = await fs.readFile(dataFile);
+        const tasks = JSON.parse(fileContent);
+        data.id = uuidv4();
+        tasks.push({...data});
+        await fs.writeFile(dataFile, JSON.stringify(tasks));
+        res.status(200).json({message: 'project saved.', task: data});
     }
 });
 
-app.post('/deleteproject', async (req, res) => {
-    console.log("deleting project")
+app.post('/deletetask', async (req, res) => {
+    console.log("deleting a task")
     const data = req.body;
     // console.log(data)
     if (JSON.stringify(data) === '{}') {
         console.log("invalid input data")
         res.status(500).json({message: 'empty payload'})
     } else {
-        const fileContent = await fs.readFile('./data/projects.json');
-        const projectsData = JSON.parse(fileContent);
-        const newProjects = projectsData.filter((project) => project.id !== data.id);
-        await fs.writeFile('./data/projects.json', JSON.stringify(newProjects));
-        res.status(200).json({message: 'project deleted.'});
+        const fileContent = await fs.readFile(dataFile);
+        const tasks = JSON.parse(fileContent);
+        const newTasks = tasks.filter((task) => task.id !== data.id);
+        await fs.writeFile(dataFile, JSON.stringify(newTasks));
+        res.status(200).json({message: 'task deleted.'});
     }
 });
 
