@@ -12,7 +12,7 @@ export default function NavBar() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="task/list">
+                    <NavLink to="tasks">
                         <span className="text-cap">tasks</span>
                     </NavLink>
                 </li>

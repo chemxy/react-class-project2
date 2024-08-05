@@ -9,7 +9,7 @@ export default function ProjectList() {
     const navigate = useNavigate();
 
     function onSelectProject(id) {
-        navigate(`task/${id}`);
+        navigate(`${id}`);
     }
 
     return (

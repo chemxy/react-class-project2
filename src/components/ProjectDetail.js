@@ -1,19 +1,19 @@
 import '../App.css';
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { ProjectContext } from "../store/ProjectContext";
+import {useNavigate, useParams} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {ProjectContext} from "../store/ProjectContext";
 
 export default function ProjectDetail() {
     const projectContext = useContext(ProjectContext);
     const navigate = useNavigate();
     // const [project, setProject] = useState(undefined);
     const params = useParams();
-    const projectId = params.projectId;
-    const project = projectContext.items.find((project) => project.id === projectId)
+    const taskId = params.taskId;
+    const task = projectContext.items.find((task) => task.id === taskId)
 
     // useEffect(() => {
-    //     console.log("getting project id: " + projectId)
-    //     fetch('http://localhost:3200/projects/' + projectId).then(res => {
+    //     console.log("getting project id: " + taskId)
+    //     fetch('http://localhost:3200/projects/' + taskId).then(res => {
     //         if (!res.ok) {
     //             throw new Error("could not get projects from backend");
     //         }
@@ -26,10 +26,10 @@ export default function ProjectDetail() {
     // }, []);
 
     function handleDelete() {
-        projectContext.deleteItem(projectId);
+        projectContext.deleteItem(taskId);
         // console.log("deleting")
         // const data = {
-        //     id: projectId
+        //     id: taskId
         // }
         // console.log(data)
         // fetch("http://localhost:3200/deleteproject", {
@@ -53,12 +53,12 @@ export default function ProjectDetail() {
         // })
     }
 
-    if (project) {
+    if (task) {
         return (
             <div>
-                <h1>{project.title}</h1>
-                <h3>{project.dueDate}</h3>
-                <p>{project.description}</p>
+                <h1>{task.title}</h1>
+                <h3>{task.dueDate}</h3>
+                <p>{task.description}</p>
                 <button className="secondary-button" onClick={handleDelete}>delete</button>
             </div>
         );

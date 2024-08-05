@@ -12,9 +12,9 @@ const router = createBrowserRouter([
         children: [
             {path: '', element: <Dashboard/>},
             {path: 'dashboard', element: <Dashboard/>},
-            {path: 'task/list', element: <ProjectList/>},
-            {path: 'task/:projectId', element: <ProjectDetail/>},
-            {path: 'task/add', element: <AddProject/>},
+            {path: 'tasks', element: <ProjectList/>},
+            {path: 'tasks/:taskId', element: <ProjectDetail/>},
+            {path: 'tasks/add', element: <AddProject/>},
         ]
     },
 ])
