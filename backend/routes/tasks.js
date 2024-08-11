@@ -27,12 +27,27 @@ router.get('/id/:taskId', async (req, res) => {
 });
 
 router.get('/count', async (req, res) => {
-    console.log("get tasks")
-    const fileContent = await fs.readFile(dataFile);
+    console.log("count tasks")
 
+    const fileContent = await fs.readFile(dataFile);
     const tasks = JSON.parse(fileContent);
 
-    res.status(200).json({taskCount: tasks.length});
+    let newTasks = tasks.filter(task => task.status === "NEW").length;
+    let inProgressTasks = tasks.filter(task => task.status === "IN PROGRESS").length;
+    let doneTasks = tasks.filter(task => task.status === "DONE").length;
+    let taskDueToday = tasks.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    let taskDueTomorrow = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+
+    res.status(200).json({
+        all: tasks.length,
+        new: newTasks,
+        inProgress: inProgressTasks,
+        done: doneTasks,
+        dueToday: taskDueToday,
+        dueTomorrow: taskDueTomorrow,
+    });
 });
 
 router.post('/addtask', async (req, res) => {

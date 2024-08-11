@@ -10,10 +10,11 @@ export default function IndexPage() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3200/tasks').then(res => {
+        fetch('http://localhost:3200/tasks/all').then(res => {
             if (!res.ok) {
                 throw new Error("could not get projects from backend");
             }
+            console.log(res)
             return res.json();
         }).then(resData => {
             console.log(resData)
@@ -23,7 +24,7 @@ export default function IndexPage() {
 
     function addProject(project) {
 
-        fetch('http://localhost:3200/project', {
+        fetch('http://localhost:3200/tasks/addtask', {
             method: 'POST',
             body: JSON.stringify(project),
             headers: {
@@ -55,7 +56,7 @@ export default function IndexPage() {
             id: id
         }
         console.log(data)
-        fetch("http://localhost:3200/deleteproject", {
+        fetch("http://localhost:3200/tasks/deletetask", {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {

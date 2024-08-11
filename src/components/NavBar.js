@@ -13,7 +13,7 @@ export default function NavBar() {
                 </li>
                 <li>
                     <NavLink to="tasks">
-                        <span className="text-cap">tasks</span>
+                        <span className="text-cap">my tasks</span>
                     </NavLink>
                 </li>
                 {/*<li>*/}
