@@ -4,6 +4,9 @@ import {NavLink} from "react-router-dom";
 export default function NavBar() {
     return (
         <div className="navbar-wrapper">
+            <div className="app-title">
+                <h3>Taskboard</h3>
+            </div>
             <ul className="navbar-options">
                 <li>
                     {/*TODO: add icons*/}
@@ -32,6 +35,7 @@ export default function NavBar() {
                 {/*    </NavLink>*/}
                 {/*</li>*/}
             </ul>
+
         </div>
     );
 }

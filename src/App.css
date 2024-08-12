@@ -131,11 +131,21 @@ button:hover {
     min-height: 100px;
 }
 
+.app-title {
+    border-radius: var(--all-border-radius);
+    border: 1px solid #547a8a;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
 .navbar-wrapper {
-    /*display: flex;*/
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     /*position: relative;*/
     /*align-content: center;*/
-    /*justify-content: center;*/
+    justify-content: center;
     /*align-items: center;*/
 }
 
@@ -165,7 +175,7 @@ button:hover {
     height: 180px;
 }
 
-.dashboard-large-cell{
+.dashboard-large-cell {
     width: 380px;
     height: 580px;
 }
