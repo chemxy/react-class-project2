@@ -1,6 +1,6 @@
 :root {
     --lightwhite: #fafafa;
-    --lightblack: #131313;
+    --lightblack: #232323;
     --all-border-radius: 28px;
 }
 
@@ -53,6 +53,8 @@
 
 .right {
     width: 85%;
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -153,14 +155,24 @@ button:hover {
 
 .navbar-options {
     list-style-type: none;
-    padding: 5px;
+    /*padding: 5px;*/
+    padding-left: 0;
     margin-left: 10%;
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
 }
 
 .navbar-option {
     margin: 15px 0;
     font-weight: bold;
+    padding: 10px 5px;
+}
+
+.active-nav-option {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--lightblack);
+    color: var(--lightwhite) !important;
+    padding: 10px 5px;
 }
 
 a,

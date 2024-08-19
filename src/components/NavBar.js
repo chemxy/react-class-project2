@@ -10,12 +10,12 @@ export default function NavBar() {
             <ul className="navbar-options">
                 <li className="navbar-option">
                     {/*TODO: add icons*/}
-                    <NavLink to="dashboard">
+                    <NavLink className={({isActive}) => isActive ? "active-nav-option" : ""} to="dashboard">
                         <span className="text-cap">my dashboard</span>
                     </NavLink>
                 </li>
                 <li className="navbar-option">
-                    <NavLink to="tasks">
+                    <NavLink className={({isActive}) => isActive ? "active-nav-option" : ""} to="tasks">
                         <span className="text-cap">my tasks</span>
                     </NavLink>
                 </li>

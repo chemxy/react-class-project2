@@ -16,7 +16,7 @@ export default function TaskList() {
         <div>
             <div>
                 <NavLink to="add">
-                    <button className="text-cap">new task</button>
+                    <button className="text-cap primary-button">new task</button>
                 </NavLink>
 
             </div>
