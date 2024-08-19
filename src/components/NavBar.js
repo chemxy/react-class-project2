@@ -8,13 +8,13 @@ export default function NavBar() {
                 <h3>Taskboard</h3>
             </div>
             <ul className="navbar-options">
-                <li>
+                <li className="navbar-option">
                     {/*TODO: add icons*/}
                     <NavLink to="dashboard">
                         <span className="text-cap">dashboard</span>
                     </NavLink>
                 </li>
-                <li>
+                <li className="navbar-option">
                     <NavLink to="tasks">
                         <span className="text-cap">my tasks</span>
                     </NavLink>

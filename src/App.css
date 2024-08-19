@@ -153,7 +153,15 @@ button:hover {
 .navbar-options {
     list-style-type: none;
     padding: 5px;
-    margin: 5px;
+    margin-left: 15%;
+}
+
+.navbar-option {
+    margin: 10px 0;
+}
+
+a:visited{
+    text-decoration: none !important;
 }
 
 .dashboard-wrapper {
