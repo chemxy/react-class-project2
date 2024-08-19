@@ -158,12 +158,14 @@ button:hover {
 .dashboard-wrapper {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 95%;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
 }
 
 .dashboard-cell {
-    border: 1px solid darkgray;
+    /*border: 1px solid darkgray;*/
     border-radius: var(--all-border-radius);
     display: flex;
     flex-direction: column;

@@ -25,10 +25,8 @@ export default function Dashboard() {
             // console.log(resData)
             setDashboardStats({
                 ...dashboardStats,
-                // allTasks: resData.all,
-                allTasks: 4,
-                // newTasks: resData.new,
-                newTasks: 2,
+                allTasks: resData.all,
+                newTasks: resData.new,
                 inProgressTasks: resData.inProgress,
                 doneTasks: resData.done,
                 tasksDueToday: resData.dueToday,
@@ -40,32 +38,34 @@ export default function Dashboard() {
 
     return (
         <div>
-            <div className="flex-row dashboard-wrapper">
-                <div>
-                    <svg width={circle.diameter * 2} height={circle.diameter * 2}>
-                        <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
-                                stroke="lightgrey"
-                                strokeWidth={circle.diameter / 5}/>
-                        <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
-                                stroke="green"
-                                strokeWidth={circle.diameter / 5}
-                                strokeDasharray={`${dashboardStats.newTasks / dashboardStats.allTasks * 618},99999`} strokeLinecap={"round"}
-                                transform={`rotate(-90, ${circle.diameter}, ${circle.diameter})`}/>
-                        <text x={circle.diameter * 0.905}
-                              y={circle.diameter * 1.05}>{dashboardStats.newTasks / dashboardStats.allTasks * 100} %
-                        </text>
-                    </svg>
-                </div>
+            <div className="dashboard-wrapper">
+                <svg width={circle.diameter * 2} height={circle.diameter * 2}>
+                    <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
+                            stroke="lightgrey"
+                            strokeWidth={circle.diameter / 5}/>
+                    <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
+                            stroke="green"
+                            strokeWidth={circle.diameter / 5}
+                            strokeDasharray={`${(1 - dashboardStats.newTasks / dashboardStats.allTasks) * 618},99999`}
+                            strokeLinecap={"round"}
+                            transform={`rotate(-90, ${circle.diameter}, ${circle.diameter})`}/>
+                    <text x={circle.diameter * 0.9}
+                          y={circle.diameter * 1.05}
+                          fontSize={24}>
+                        {(1 - dashboardStats.newTasks / dashboardStats.allTasks) * 100} %
+                    </text>
+                </svg>
+            </div>
+            <div className="dashboard-wrapper">
                 <DashboardSmallCell value={dashboardStats.newTasks} title={"new task"}></DashboardSmallCell>
-                <DashboardSmallCell value={dashboardStats.inProgressTasks} title={"in progress"}></DashboardSmallCell>
+                <DashboardSmallCell value={dashboardStats.inProgressTasks}
+                                    title={"in progress"}></DashboardSmallCell>
                 <DashboardSmallCell value={dashboardStats.doneTasks} title={"task done"}></DashboardSmallCell>
+                <DashboardSmallCell value={dashboardStats.tasksDueToday}
+                                    title={"tasks due today"}></DashboardSmallCell>
+                <DashboardSmallCell value={dashboardStats.taskDueTomorrow}
+                                    title={"tasks due tomorrow"}></DashboardSmallCell>
             </div>
-            <div className="flex-row dashboard-wrapper">
-                <DashboardLargeCell value={dashboardStats.tasksDueToday} title={"tasks due today"}></DashboardLargeCell>
-                <DashboardLargeCell value={dashboardStats.taskDueTomorrow}
-                                    title={"tasks due tomorrow"}></DashboardLargeCell>
-            </div>
-
         </div>
 
     );
