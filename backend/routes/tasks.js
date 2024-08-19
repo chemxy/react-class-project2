@@ -54,6 +54,7 @@ router.post('/addtask', async (req, res) => {
     console.log("add task")
     const data = req.body;
     console.log(data)
+
     if (JSON.stringify(data) === '{}') {
         console.log("invalid input data")
         res.status(500).json({message: 'empty payload'})

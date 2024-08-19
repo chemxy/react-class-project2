@@ -2,6 +2,7 @@ import '../App.css';
 import DashboardSmallCell from "./DashboardSmallCell";
 import DashboardLargeCell from "./DashboardLargeCell";
 import {useEffect, useState} from "react";
+import ProgessBar from "./ProgressBar";
 
 export default function Dashboard() {
 
@@ -14,9 +15,6 @@ export default function Dashboard() {
         taskDueTomorrow: 0
     })
 
-    const [circle, setCircle] = useState({
-        diameter: 200
-    })
 
     useEffect(() => {
         fetch('http://localhost:3200/tasks/count').then(res => {
@@ -39,22 +37,7 @@ export default function Dashboard() {
     return (
         <div>
             <div className="dashboard-wrapper">
-                <svg width={circle.diameter * 2} height={circle.diameter * 2}>
-                    <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
-                            stroke="lightgrey"
-                            strokeWidth={circle.diameter / 5}/>
-                    <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
-                            stroke="green"
-                            strokeWidth={circle.diameter / 5}
-                            strokeDasharray={`${(1 - dashboardStats.newTasks / dashboardStats.allTasks) * 618},99999`}
-                            strokeLinecap={"round"}
-                            transform={`rotate(-90, ${circle.diameter}, ${circle.diameter})`}/>
-                    <text x={circle.diameter * 0.9}
-                          y={circle.diameter * 1.05}
-                          fontSize={24}>
-                        {(1 - dashboardStats.newTasks / dashboardStats.allTasks) * 100} %
-                    </text>
-                </svg>
+                <ProgessBar allTasks={dashboardStats.allTasks} newTasks={dashboardStats.newTasks}></ProgessBar>
             </div>
             <div className="dashboard-wrapper">
                 <DashboardSmallCell value={dashboardStats.newTasks} title={"new task"}></DashboardSmallCell>
