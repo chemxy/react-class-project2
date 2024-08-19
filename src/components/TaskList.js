@@ -21,14 +21,18 @@ export default function TaskList() {
 
             </div>
             <div>
-                {projects.items.map(task => <div className="project-detail-container flex-row" key={task.id}>
-                    <button className="project-detail-button"
-                            onClick={() => onSelectTask(task.id)}>
-                        {task.title}
-                    </button>
-                    <div>due: {task.dueDate}</div>
-                    <div>priority : {task.priority}</div>
-                    <div>status : {task.status}</div>
+                {projects.items.map(task => <div className="project-detail-container" key={task.id}>
+                    <div>
+                        <button className="project-detail-button text-cap"
+                                onClick={() => onSelectTask(task.id)}>
+                            {task.title}
+                        </button>
+                    </div>
+                    <div className="flex-row text-cap">
+                        <div>due: {task.dueDate}</div>
+                        <div>priority : {task.priority}</div>
+                        <div>status : {task.status}</div>
+                    </div>
                 </div>)}
             </div>
         </div>

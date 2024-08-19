@@ -63,7 +63,7 @@ button:hover {
 
 .primary-button {
     padding: 15px 25px;
-    border: none;
+    border: 1px solid grey;
     border-radius: var(--all-border-radius);
     font-size: 20px;
     background-color: var(--lightwhite);
@@ -72,22 +72,6 @@ button:hover {
 
 .primary-button:hover {
     background-color: lightgrey;
-}
-
-.secondary-button {
-    width: 120px;
-    padding: 15px 25px;
-    border: none;
-    border-radius: var(--all-border-radius);
-    font-size: 20px;
-    background-color: var(--lightblack);
-    color: var(--lightwhite);
-    margin-right: 2rem;
-}
-
-.secondary-button:hover {
-    /*background-color: darkgray;*/
-    text-decoration: underline;
 }
 
 #project-list-container {
@@ -101,8 +85,9 @@ button:hover {
 }
 
 .project-detail-button {
-    background-color: var(--lightblack);
-    color: var(--lightwhite);
+    /*background-color: var(--lightblack);*/
+    background-color: transparent;
+    /*color: var(--lightwhite);*/
     border: none;
     font-size: 24px;
     margin-bottom: 12px;
