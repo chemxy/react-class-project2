@@ -11,7 +11,7 @@ export default function NavBar() {
                 <li className="navbar-option">
                     {/*TODO: add icons*/}
                     <NavLink to="dashboard">
-                        <span className="text-cap">dashboard</span>
+                        <span className="text-cap">my dashboard</span>
                     </NavLink>
                 </li>
                 <li className="navbar-option">

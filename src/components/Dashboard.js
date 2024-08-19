@@ -23,8 +23,8 @@ export default function Dashboard() {
             // console.log(resData)
             setDashboardStats({
                 ...dashboardStats,
-                allTasks: resData.all,
-                newTasks: resData.new,
+                allTasks: 2,
+                newTasks: 1,
                 inProgressTasks: resData.inProgress,
                 doneTasks: resData.done,
                 tasksDueToday: resData.dueToday,

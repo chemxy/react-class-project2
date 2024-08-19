@@ -9,13 +9,13 @@
     justify-content: center;
     padding: 100px 0;
     align-self: center;
-    background-color: #547a8a;
+    background-color: #eee;
     font-family: "Quicksand", sans-serif;
 }
 
 .app-wrapper {
     position: relative;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 20px;
     width: 1386px;
     height: 780px;
@@ -134,10 +134,11 @@ button:hover {
 
 .app-title {
     border-radius: var(--all-border-radius);
-    border: 1px solid #547a8a;
+    /*border: 1px solid #547a8a;*/
     width: 100%;
     justify-content: center;
     text-align: center;
+    font-size: 30px;
 }
 
 .navbar-wrapper {
@@ -153,15 +154,23 @@ button:hover {
 .navbar-options {
     list-style-type: none;
     padding: 5px;
-    margin-left: 15%;
+    margin-left: 10%;
+    font-family: "Open Sans";
 }
 
 .navbar-option {
-    margin: 10px 0;
+    margin: 15px 0;
+    font-weight: bold;
 }
 
-a:visited{
-    text-decoration: none !important;
+a,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .dashboard-wrapper {

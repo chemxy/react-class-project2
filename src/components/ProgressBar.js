@@ -12,7 +12,7 @@ export default function ProgessBar({newTasks, allTasks}) {
                     stroke="lightgrey"
                     strokeWidth={circle.diameter / 5}/>
             <circle cx={circle.diameter} cy={circle.diameter} r={circle.diameter / 2} fill="none"
-                    stroke="green"
+                    stroke="forestgreen"
                     strokeWidth={circle.diameter / 5}
                     strokeDasharray={`${(1 - newTasks / allTasks) * 618},99999`}
                     strokeLinecap={"round"}
