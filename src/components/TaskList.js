@@ -14,11 +14,21 @@ export default function TaskList() {
 
     return (
         <div>
-            <div>
-                <NavLink to="add">
-                    <button className="text-cap primary-button">new task</button>
-                </NavLink>
-
+            <div className="flex-row">
+                <div>
+                    <NavLink to="add">
+                        <button className="text-cap primary-button">new task</button>
+                    </NavLink>
+                </div>
+                <div className="filter-wrapper text-cap">
+                    <label className="filter-label">filter</label>
+                    <select className="text-cap">
+                        <option value="">all tasks</option>
+                        <option value="">new tasks</option>
+                        <option value="">due today</option>
+                        <option value="">due tomorrow</option>
+                    </select>
+                </div>
             </div>
             <div>
                 {projects.items.map(task => <div className="project-detail-container" key={task.id}>
@@ -28,10 +38,10 @@ export default function TaskList() {
                             {task.title}
                         </button>
                     </div>
-                    <div className="flex-row text-cap">
-                        <div>due: {task.dueDate}</div>
-                        <div>priority : {task.priority}</div>
-                        <div>status : {task.status}</div>
+                    <div className="task-details flex-row text-cap">
+                        <div className="task-option">due: {task.dueDate}</div>
+                        <div className="task-option">priority : {task.priority}</div>
+                        <div className="task-option">status : {task.status}</div>
                     </div>
                 </div>)}
             </div>
