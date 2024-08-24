@@ -1,15 +1,26 @@
 import '../App.css';
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ProjectContext} from "../store/ProjectContext";
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function TaskList() {
 
-    const projects = useContext(ProjectContext)
+    const projectContext = useContext(ProjectContext)
     const navigate = useNavigate();
+
+    const [projects, setProjects] = useState([])
+
+    useEffect(() => {
+        console.log(projectContext.items)
+        setProjects(projectContext.items);
+    }, []);
 
     function onSelectTask(id) {
         navigate(`${id}`);
+    }
+
+    function filterTasks(event) {
+        console.log("filter tasks: " + event.target.value)
     }
 
     return (
@@ -22,16 +33,16 @@ export default function TaskList() {
                 </div>
                 <div className="filter-wrapper text-cap">
                     <label className="filter-label">filter</label>
-                    <select className="text-cap">
-                        <option value="">all tasks</option>
-                        <option value="">new tasks</option>
-                        <option value="">due today</option>
-                        <option value="">due tomorrow</option>
+                    <select className="text-cap" onChange={event => filterTasks(event)}>
+                        <option value="all">all tasks</option>
+                        <option value="new">new tasks</option>
+                        <option value="dueToday">due today</option>
+                        <option value="dueTomorrow">due tomorrow</option>
                     </select>
                 </div>
             </div>
             <div>
-                {projects.items.map(task => <div className="project-detail-container" key={task.id}>
+                {projects.map(task => <div className="project-detail-container" key={task.id}>
                     <div>
                         <button className="project-detail-button text-cap"
                                 onClick={() => onSelectTask(task.id)}>
