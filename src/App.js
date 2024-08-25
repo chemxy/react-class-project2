@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import IndexPage from "./components/IndexPage";
 import ProjectDetail from "./components/ProjectDetail";
 import AddTask from "./components/AddTask";
@@ -10,7 +10,11 @@ const router = createBrowserRouter([
         path: '',
         element: <IndexPage/>,
         children: [
-            {path: '', element: <Dashboard/>},
+            // {path: '', element: <Dashboard/>},
+            {
+                index: true,
+                loader: async () => redirect('dashboard'),
+            },
             {path: 'dashboard', element: <Dashboard/>},
             {path: 'tasks', element: <TaskList/>},
             {path: 'tasks/:taskId', element: <ProjectDetail/>},
