@@ -226,3 +226,8 @@ a:hover {
 .task-option{
     margin-right: 20px;
 }
+
+.no-tasks{
+    margin-top: 40px;
+    margin-left: 10px;
+}

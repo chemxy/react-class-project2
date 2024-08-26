@@ -72,6 +72,7 @@ export default function TaskList() {
                 </div>
             </div>
             <div>
+                {tasks.length === 0 && <div className="text-cap no-tasks">no tasks found</div>}
                 {tasks.map(task => <div className="project-detail-container" key={task.id}>
                     <div>
                         <button className="project-detail-button text-cap"
