@@ -39,13 +39,13 @@ export default function TaskList() {
                 setTasks(lowPriorityProjects);
                 break;
             case 'dueToday':
-                const todayTasks = taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
+                const todayTasks = taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString());
                 setTasks(todayTasks);
                 break;
             case 'dueTomorrow':
                 let tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1)
-                const tomorrowTasks = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+                const tomorrowTasks = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString());
                 setTasks(tomorrowTasks);
                 break;
         }
