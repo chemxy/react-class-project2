@@ -42,7 +42,7 @@ export default function AddTask() {
                     <textarea type="text" name="description" className="input-text" id="input-description"/>
                 </div>
             </div>
-            <button type="submit" className="secondary-button text-cap">add</button>
+            <button type="submit" className="primary-button text-cap">add</button>
             <NavLink to="/tasks">
                 <button type="button" className="primary-button text-cap">cancel</button>
             </NavLink>
