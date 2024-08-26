@@ -1,10 +1,10 @@
 import {useContext} from "react";
-import {ProjectContext} from "../store/ProjectContext";
+import {TaskContext} from "../store/TaskContext";
 import {NavLink} from "react-router-dom";
 
 export default function AddTask() {
 
-    const projectContext = useContext(ProjectContext);
+    const projectContext = useContext(TaskContext);
 
     function onAddTask(event) {         //TODO handle empty / invalid input
         event.preventDefault();

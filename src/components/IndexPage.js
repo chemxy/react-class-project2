@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {ProjectContext} from "../store/ProjectContext";
+import {TaskContext} from "../store/TaskContext";
 import '../App.css';
 import {Outlet, useNavigate} from "react-router-dom";
 import NavBar from "./NavBar";
@@ -88,7 +88,7 @@ export default function IndexPage() {
     }
 
     return (
-        <ProjectContext.Provider value={ProjectCtx}>
+        <TaskContext.Provider value={ProjectCtx}>
             <div className="App">
                 <div className="app-wrapper flex-row">
                     <div className="left">
@@ -101,6 +101,6 @@ export default function IndexPage() {
 
 
             </div>
-        </ProjectContext.Provider>
+        </TaskContext.Provider>
     );
 }

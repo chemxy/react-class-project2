@@ -1,18 +1,18 @@
 import '../App.css';
 import {useContext, useEffect, useState} from "react";
-import {ProjectContext} from "../store/ProjectContext";
+import {TaskContext} from "../store/TaskContext";
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function TaskList() {
 
-    const projectContext = useContext(ProjectContext)
+    const taskContext = useContext(TaskContext)
     const navigate = useNavigate();
 
     const [projects, setProjects] = useState([])
 
     useEffect(() => {
-        console.log(projectContext.items)
-        setProjects(projectContext.items);
+        console.log(taskContext.items)
+        setProjects(taskContext.items);
     }, []);
 
     function onSelectTask(id) {
@@ -21,6 +21,32 @@ export default function TaskList() {
 
     function filterTasks(event) {
         console.log("filter tasks: " + event.target.value)
+        const filterValue = event.target.value;
+        switch (filterValue) {
+            case 'all':
+                setProjects(taskContext.items);
+                break;
+            case 'new':
+                const newProjects = taskContext.items.filter(project => project.status === 'NEW');
+                setProjects(newProjects);
+                break;
+            case 'high':
+                const highPriorityProjects = taskContext.items.filter(project => project.priority === 'HIGH');
+                setProjects(highPriorityProjects);
+                break;
+            case 'low':
+                const lowPriorityProjects = taskContext.items.filter(project => project.priority === 'LOW');
+                setProjects(lowPriorityProjects);
+                break;
+            case 'dueToday':
+                taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
+                let tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1)
+                let taskDueTomorrow = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+                break;
+            case 'dueTomorrow':
+                break;
+        }
     }
 
     return (
@@ -36,6 +62,8 @@ export default function TaskList() {
                     <select className="text-cap" onChange={event => filterTasks(event)}>
                         <option value="all">all tasks</option>
                         <option value="new">new tasks</option>
+                        <option value="high">high priority tasks</option>
+                        <option value="low">low priority tasks</option>
                         <option value="dueToday">due today</option>
                         <option value="dueTomorrow">due tomorrow</option>
                     </select>

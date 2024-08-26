@@ -1,10 +1,10 @@
 import '../App.css';
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useContext} from "react";
-import {ProjectContext} from "../store/ProjectContext";
+import {TaskContext} from "../store/TaskContext";
 
 export default function ProjectDetail() {
-    const projectContext = useContext(ProjectContext);
+    const projectContext = useContext(TaskContext);
     const navigate = useNavigate();
     const params = useParams();
     const taskId = params.taskId;
