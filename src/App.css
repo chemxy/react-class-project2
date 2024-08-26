@@ -59,6 +59,7 @@
     background-color: white;
     border: 1px solid darkgray;
     border-radius: var(--all-border-radius);
+    padding: 20px;
 }
 
 button:hover {
@@ -223,15 +224,15 @@ a:hover {
     margin-right: 10px;
 }
 
-.task-details{
+.task-details {
     justify-content: space-between;
 }
 
-.task-option{
+.task-option {
     margin-right: 20px;
 }
 
-.no-tasks{
+.no-tasks {
     margin-top: 40px;
     margin-left: 10px;
 }
