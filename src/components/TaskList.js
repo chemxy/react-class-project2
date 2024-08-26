@@ -8,11 +8,11 @@ export default function TaskList() {
     const taskContext = useContext(TaskContext)
     const navigate = useNavigate();
 
-    const [projects, setProjects] = useState([])
+    const [tasks, setTasks] = useState([])
 
     useEffect(() => {
         console.log(taskContext.items)
-        setProjects(taskContext.items);
+        setTasks(taskContext.items);
     }, []);
 
     function onSelectTask(id) {
@@ -24,27 +24,29 @@ export default function TaskList() {
         const filterValue = event.target.value;
         switch (filterValue) {
             case 'all':
-                setProjects(taskContext.items);
+                setTasks(taskContext.items);
                 break;
             case 'new':
                 const newProjects = taskContext.items.filter(project => project.status === 'NEW');
-                setProjects(newProjects);
+                setTasks(newProjects);
                 break;
             case 'high':
                 const highPriorityProjects = taskContext.items.filter(project => project.priority === 'HIGH');
-                setProjects(highPriorityProjects);
+                setTasks(highPriorityProjects);
                 break;
             case 'low':
                 const lowPriorityProjects = taskContext.items.filter(project => project.priority === 'LOW');
-                setProjects(lowPriorityProjects);
+                setTasks(lowPriorityProjects);
                 break;
             case 'dueToday':
-                taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
-                let tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1)
-                let taskDueTomorrow = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+                const todayTasks = taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
+                setTasks(todayTasks);
                 break;
             case 'dueTomorrow':
+                let tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1)
+                const tomorrowTasks = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+                setTasks(tomorrowTasks);
                 break;
         }
     }
@@ -70,7 +72,7 @@ export default function TaskList() {
                 </div>
             </div>
             <div>
-                {projects.map(task => <div className="project-detail-container" key={task.id}>
+                {tasks.map(task => <div className="project-detail-container" key={task.id}>
                     <div>
                         <button className="project-detail-button text-cap"
                                 onClick={() => onSelectTask(task.id)}>
