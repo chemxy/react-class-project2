@@ -23,10 +23,10 @@ export default function AddTask() {
             <h1 className="text-cap">create a task</h1>
             <div className="input-group">
                 <div>
-                    <label className="input-label">name</label>
+                    <label className="input-label">title</label>
                 </div>
                 <div>
-                    <input type="text" name="name" className="input-text" required/>
+                    <input type="text" name="title" className="input-text" required/>
                 </div>
             </div>
 
