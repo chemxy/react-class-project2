@@ -13,7 +13,7 @@ export default function TaskList() {
     useEffect(() => {
         console.log(taskContext.items)
         setTasks(taskContext.items);
-    }, []);
+    }, [taskContext.items]);
 
     function onSelectTask(id) {
         navigate(`${id}`);
