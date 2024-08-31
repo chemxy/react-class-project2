@@ -3,15 +3,15 @@ import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useContext} from "react";
 import {TaskContext} from "../store/TaskContext";
 
-export default function ProjectDetail() {
-    const projectContext = useContext(TaskContext);
+export default function TaskDetail() {
+    const taskContext = useContext(TaskContext);
     const navigate = useNavigate();
     const params = useParams();
     const taskId = params.taskId;
-    const task = projectContext.items.find((task) => task.id === taskId)
+    const task = taskContext.items.find((task) => task.id === taskId)
 
     function handleDelete() {
-        projectContext.deleteItem(taskId);
+        taskContext.deleteItem(taskId);
         console.log("deleting")
         const data = {
             id: taskId
@@ -27,7 +27,7 @@ export default function ProjectDetail() {
         ).then(res => {
             console.log(res)
             if (res.ok) {
-                console.log("project deleted.")
+                console.log("task deleted.")
                 return res.json();
             }
 
@@ -43,14 +43,19 @@ export default function ProjectDetail() {
             <div>
                 <div>
                     <NavLink to="/tasks">
-                        <button>Back</button>
+                        <button className="primary-button text-cap">back</button>
                     </NavLink>
                 </div>
                 <div>
                     <h1>{task.title}</h1>
-                    <h3>{task.dueDate}</h3>
+                    <h4 className="text-cap">created date: {task.createdDate}</h4>
+                    <h4 className="text-cap">Due date: {task.dueDate}</h4>
+                    <h4 className="text-cap">priority: {task.priority}</h4>
+                    <h4 className="text-cap">status: {task.status}</h4>
+                    <br/>
                     <p>{task.description}</p>
-                    <button className="secondary-button" onClick={handleDelete}>delete</button>
+                    <br/>
+                    <button className="primary-button text-cap" onClick={handleDelete}>delete</button>
                 </div>
             </div>
         );
