@@ -80,8 +80,8 @@ button:hover {
 }
 
 #project-list-container {
-    margin-top: 50px;
-    font-size: 24px;
+    max-height: 680px;
+    overflow-y: scroll;
 }
 
 .project-detail-container {
@@ -124,7 +124,7 @@ button:hover {
     font-size: 18px;
 }
 
-#input-priority{
+#input-priority {
     margin-left: 30px;
 }
 
