@@ -2,23 +2,21 @@
   {
     "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
     "title": "task 1",
-    "dueDate": "08-10-2024",
+    "dueDate": "2024-08-10",
     "description": "this is a sample description for task 1",
-    "status": "NEW",
-    "priority": "HIGH",
-    "tags": [],
-    "createdDate": "03-16-2024",
-    "completionDate": "04-22-2024"
+    "status": "new",
+    "priority": "high",
+    "createdDate": "2024-03-16",
+    "completionDate": "2024-04-22"
   },
   {
     "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
     "title": "task 2",
-    "dueDate": "08-11-2024",
+    "dueDate": "2024-8-11",
     "description": "this is a sample description for task 2",
-    "status": "NEW",
-    "priority": "LOW",
-    "tags": [],
-    "createdDate": "03-11-2024",
-    "completionDate": "05-18-2024"
+    "status": "new",
+    "priority": "low",
+    "createdDate": "2024-03-11",
+    "completionDate": "2024-05-18"
   }
 ]

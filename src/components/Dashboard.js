@@ -1,6 +1,5 @@
 import '../App.css';
 import DashboardSmallCell from "./DashboardSmallCell";
-import DashboardLargeCell from "./DashboardLargeCell";
 import {useEffect, useState} from "react";
 import ProgessBar from "./ProgressBar";
 

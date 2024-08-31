@@ -27,15 +27,15 @@ export default function TaskList() {
                 setTasks(taskContext.items);
                 break;
             case 'new':
-                const newProjects = taskContext.items.filter(project => project.status === 'NEW');
+                const newProjects = taskContext.items.filter(project => project.status === 'new');
                 setTasks(newProjects);
                 break;
             case 'high':
-                const highPriorityProjects = taskContext.items.filter(project => project.priority === 'HIGH');
+                const highPriorityProjects = taskContext.items.filter(project => project.priority === 'high');
                 setTasks(highPriorityProjects);
                 break;
             case 'low':
-                const lowPriorityProjects = taskContext.items.filter(project => project.priority === 'LOW');
+                const lowPriorityProjects = taskContext.items.filter(project => project.priority === 'low');
                 setTasks(lowPriorityProjects);
                 break;
             case 'dueToday':

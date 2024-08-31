@@ -22,11 +22,11 @@ export default function IndexPage() {
         })
     }, []);
 
-    function addProject(project) {
-
+    function addProject(task) {
+        console.log(task)
         fetch('http://localhost:3200/tasks/addtask', {
             method: 'POST',
-            body: JSON.stringify(project),
+            body: JSON.stringify(task),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -38,7 +38,7 @@ export default function IndexPage() {
 
             }
         }).then(data => {
-            console.log(`added project - id: ${project.id}`);
+            console.log(`added project - id: ${task.id}`);
             setProjects((prevProjects) => [...prevProjects, data.project]);
             navigate('/');
         }).catch(error => {

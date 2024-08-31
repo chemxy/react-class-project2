@@ -4,13 +4,18 @@ import {NavLink} from "react-router-dom";
 
 export default function AddTask() {
 
-    const projectContext = useContext(TaskContext);
+    const taskContext = useContext(TaskContext);
 
-    function onAddTask(event) {         //TODO handle empty / invalid input
+    function onAddTask(event) {
         event.preventDefault();
         const fd = new FormData(event.target);
         const newTask = Object.fromEntries(fd.entries());
-        projectContext.addItem(newTask); //sync with project context
+
+        //add meta data
+        newTask.status = "new";
+        newTask.createdDate = new Date().toISOString().split('T')[0]; // get today's date
+        console.log(newTask)
+        // taskContext.addItem(newTask); //sync with project context
     }
 
     return <div>
@@ -21,16 +26,29 @@ export default function AddTask() {
                     <label className="input-label">name</label>
                 </div>
                 <div>
-                    <input type="text" name="name" className="input-text"/>
+                    <input type="text" name="name" className="input-text" required/>
                 </div>
             </div>
 
-            <div className="input-group">
-                <div>
-                    <label className="input-label">due date</label>
+            <div className="input-group flex-row">
+                <div className="width-50">
+                    <div>
+                        <label className="input-label">due date</label>
+                    </div>
+                    <div>
+                        <input type="date" name="dueDate" className="input-text" required/>
+                    </div>
                 </div>
-                <div>
-                    <input type="text" name="dueDate" className="input-text"/>
+                <div className="width-50" id="input-priority">
+                    <div>
+                        <label className="input-label">priority</label>
+                    </div>
+                    <div>
+                        <select name="priority" className="input-text text-cap">
+                            <option value="low">low</option>
+                            <option value="high">high</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 

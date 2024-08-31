@@ -3,7 +3,7 @@ export class Task {
     description; //string
     status; //TaskStatus
     dueDate; //2025-05-15
-    tags; // string[]
+    // tags; // string[]
     priority; //TaskPriority
     createdDate; //2025-05-15
     completionDate; //2025-05-15

@@ -62,6 +62,7 @@ router.post('/addtask', async (req, res) => {
         console.log(data)
         const fileContent = await fs.readFile(dataFile);
         const tasks = JSON.parse(fileContent);
+
         data.id = uuidv4();
         tasks.push({...data});
         await fs.writeFile(dataFile, JSON.stringify(tasks));
