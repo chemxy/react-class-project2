@@ -45,7 +45,7 @@ export default function TaskList() {
             case 'dueTomorrow':
                 let tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1)
-                const tomorrowTasks = tasks.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === tomorrow.toDateString());
+                const tomorrowTasks = taskContext.items.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === tomorrow.toDateString());
                 setTasks(tomorrowTasks);
                 break;
         }
