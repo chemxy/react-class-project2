@@ -10,13 +10,13 @@ export class Task {
 }
 
 export class TaskStatus {
-    static NEW = 'NEW';
-    static IN_PROGRESS = 'IN PROGRESS';
-    static DONE = 'DONE';
+    static NEW = 'new';
+    static IN_PROGRESS = 'in progress';
+    static DONE = 'done';
 }
 
 export class TaskPriority {
-    static HIGH = 'HIGH';
-    static MEDIUM = 'MEDIUM';
-    static LOW = 'LOW';
+    static HIGH = 'high';
+    static MEDIUM = 'medium';
+    static LOW = 'low';
 }

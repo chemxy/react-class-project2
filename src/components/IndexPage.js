@@ -23,7 +23,6 @@ export default function IndexPage() {
     }, []);
 
     function addProject(task) {
-        console.log(task)
         fetch('http://localhost:3200/tasks/addtask', {
             method: 'POST',
             body: JSON.stringify(task),

@@ -15,7 +15,7 @@ export default function AddTask() {
         newTask.status = "new";
         newTask.createdDate = new Date().toISOString().split('T')[0]; // get today's date
         console.log(newTask)
-        // taskContext.addItem(newTask); //sync with project context
+        taskContext.addItem(newTask); //sync with project context and add task to backend
     }
 
     return <div>

@@ -32,28 +32,30 @@ router.get('/count', async (req, res) => {
     const fileContent = await fs.readFile(dataFile);
     const tasks = JSON.parse(fileContent);
 
-    let newTasks = tasks.filter(task => task.status === "NEW").length;
-    let inProgressTasks = tasks.filter(task => task.status === "IN PROGRESS").length;
-    let doneTasks = tasks.filter(task => task.status === "DONE").length;
+    let newTasks = tasks.filter(task => task.status === "new").length;
+    let inProgressTasks = tasks.filter(task => task.status === "in progress").length;
+    let doneTasks = tasks.filter(task => task.status === "done").length;
     let taskDueToday = tasks.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
     let taskDueTomorrow = tasks.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+    const body =
+        {
+            all: tasks.length,
+            new: newTasks,
+            inProgress: inProgressTasks,
+            done: doneTasks,
+            dueToday: taskDueToday,
+            dueTomorrow: taskDueTomorrow,
+        }
 
-    res.status(200).json({
-        all: tasks.length,
-        new: newTasks,
-        inProgress: inProgressTasks,
-        done: doneTasks,
-        dueToday: taskDueToday,
-        dueTomorrow: taskDueTomorrow,
-    });
+    console.log(body)
+    res.status(200).json(body);
 });
 
 router.post('/addtask', async (req, res) => {
     console.log("add task")
     const data = req.body;
-    console.log(data)
 
     if (JSON.stringify(data) === '{}') {
         console.log("invalid input data")
