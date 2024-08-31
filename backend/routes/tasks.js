@@ -68,6 +68,8 @@ router.post('/addtask', async (req, res) => {
         data.id = uuidv4();
         tasks.push({...data});
         await fs.writeFile(dataFile, JSON.stringify(tasks));
+
+        console.log("returned data ", data)
         res.status(200).json({message: 'project saved.', task: data});
     }
 });

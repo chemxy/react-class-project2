@@ -37,8 +37,7 @@ export default function IndexPage() {
 
             }
         }).then(data => {
-            console.log(`added project - id: ${task.id}`);
-            setProjects((prevProjects) => [...prevProjects, data.project]);
+            setProjects((prevProjects) => [...prevProjects, data.task]);
             navigate('/');
         }).catch(error => {
             console.log(error);
