@@ -73,6 +73,36 @@ export default function TaskDetail() {
         })
     }
 
+    function updateTaskPriority(event) {
+        const newValue = event.target.value;
+        console.log(newValue);
+        const body = {
+            id: task.id,
+            updateType: "priority",
+            newValue: newValue
+        }
+        fetch("http://localhost:3200/tasks/updatetask", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            // console.log(res)
+            if (res.ok) {
+                console.log("task updated.")
+                return res.json();
+            }
+        }).then(data => {
+            console.log(data);
+            setTask(data.task);
+            setChangeTaskPriority(false);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
     if (task) {
         return (
             <div>
@@ -97,8 +127,21 @@ export default function TaskDetail() {
                             <span> <input type="date" name="dueDate"
                                           onChange={(event) => updateTaskDueDate(event)}/></span>}
                     </h4>
-                    <h4 className="text-cap">priority: {task.priority}
-                        <button className="icon-button"><FaEdit onClick={() => setChangeTaskPriority(true)}/></button>
+                    <h4 className="text-cap">priority:
+                        {!changeTaskPriority && <span> {task.priority}
+                            <button className="icon-button">
+                                <FaEdit onClick={() => setChangeTaskPriority(true)}/>
+                            </button>
+                        </span>
+                        }
+
+                        {changeTaskPriority &&
+                            <span> <select className="text-cap" name="priority" defaultValue={task.priority === 'low' ? 'low' : 'high'}
+                                           onChange={(event) => updateTaskPriority(event)}>
+                                    <option value="low">low</option>
+                                    <option value="high">high</option>
+                                </select>
+                            </span>}
                     </h4>
                     <h4 className="text-cap">status: {task.status}
                         <button className="icon-button"><FaEdit onClick={() => setChangeTaskStatus(true)}/></button>

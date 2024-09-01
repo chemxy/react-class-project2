@@ -7,7 +7,7 @@ import NavBar from "./NavBar";
 export default function IndexPage() {
 
     const navigate = useNavigate();
-    const [projects, setProjects] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3200/tasks/all').then(res => {
@@ -18,7 +18,7 @@ export default function IndexPage() {
             return res.json();
         }).then(resData => {
             console.log(resData)
-            setProjects(resData.tasks);
+            setTasks(resData.tasks);
         })
     }, []);
 
@@ -37,7 +37,7 @@ export default function IndexPage() {
 
             }
         }).then(data => {
-            setProjects((prevProjects) => [...prevProjects, data.task]);
+            setTasks((prevProjects) => [...prevProjects, data.task]);
             navigate('/');
         }).catch(error => {
             console.log(error);
@@ -70,8 +70,8 @@ export default function IndexPage() {
 
         }).then(data => {
             console.log(data);
-            const newProjects = projects.filter((project) => project.id !== id);
-            setProjects(newProjects);
+            const newProjects = tasks.filter((project) => project.id !== id);
+            setTasks(newProjects);
             navigate('/');
         }).catch(error => {
             console.log(error)
@@ -80,7 +80,7 @@ export default function IndexPage() {
     }
 
     const ProjectCtx = {
-        items: projects,
+        items: tasks,
         addItem: addProject,
         deleteItem: deleteProject,
     }
