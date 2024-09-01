@@ -9,7 +9,7 @@ export default function TaskDetail() {
     const navigate = useNavigate();
     const params = useParams();
     const taskId = params.taskId;
-    const task = taskContext.items.find((task) => task.id === taskId)
+    const [task, setTask] = useState(taskContext.items.find((task) => task.id === taskId))
 
     const [changeTaskDueDate, setChangeTaskDueDate] = useState(false);
     const [changeTaskPriority, setChangeTaskPriority] = useState(false);
@@ -44,8 +44,33 @@ export default function TaskDetail() {
     }
 
     function updateTaskDueDate(event) {
-        console.log(event.target.value)
-
+        const newValue = event.target.value;
+        console.log(newValue);
+        const body = {
+            id: task.id,
+            updateType: "dueDate",
+            newValue: newValue
+        }
+        fetch("http://localhost:3200/tasks/updatetask", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            // console.log(res)
+            if (res.ok) {
+                console.log("task updated.")
+                return res.json();
+            }
+        }).then(data => {
+            console.log(data);
+            setTask(data.task);
+            setChangeTaskDueDate(false);
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     if (task) {
