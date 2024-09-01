@@ -79,6 +79,11 @@ button:hover {
     background-color: lightgrey;
 }
 
+.icon-button {
+    border: none;
+    background-color: transparent;
+}
+
 #project-list-container {
     max-height: 680px;
     overflow-y: scroll;

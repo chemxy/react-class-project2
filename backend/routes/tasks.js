@@ -56,6 +56,16 @@ router.get('/count', async (req, res) => {
 router.post('/addtask', async (req, res) => {
     console.log("add task")
     const data = req.body;
+    /*
+        * body =   {
+            "title": "task 1",
+            "dueDate": "2024-08-10",
+            "description": "this is a sample description for task 1",
+            "status": "new",
+            "priority": "high",
+            "createdDate": "2024-03-16",
+          }
+        * */
 
     if (JSON.stringify(data) === '{}') {
         console.log("invalid input data")
@@ -70,7 +80,59 @@ router.post('/addtask', async (req, res) => {
         await fs.writeFile(dataFile, JSON.stringify(tasks));
 
         console.log("returned data ", data)
-        res.status(200).json({message: 'project saved.', task: data});
+        res.status(200).json({message: 'task saved.', task: data});
+    }
+});
+
+router.post('/updatetask', async (req, res) => {
+    console.log("update task")
+    const data = req.body;
+    /*
+    * body = { updateType: "status", newValue: "done" }
+    * body = { updateType: "priority", newValue: "high" }
+    * body = { updateType: "dueDate", newValue: "2024-02-28" }
+    * */
+
+    if (JSON.stringify(data) === '{}') {
+        console.log("invalid input data")
+        res.status(500).json({message: 'empty payload'})
+    } else {
+        console.log(data)
+        const fileContent = await fs.readFile(dataFile);
+        const tasks = JSON.parse(fileContent);
+        let newTasks = [];
+        let newData = undefined;
+        switch (data.updateType) {
+            case "status":
+                newTasks = tasks.map(task => {
+                    if (task.id === data.id) {
+                        newData = {...task, status: data.newValue};
+                        return newData;
+                    } else return task;
+                })
+                break;
+            case "priority":
+                newTasks = tasks.map(task => {
+                    if (task.id === data.id) {
+                        newData = {...task, priority: data.newValue};
+                        return newData;
+                    } else return task;
+                })
+                break;
+            case "dueDate":
+                newTasks = tasks.map(task => {
+                    if (task.id === data.id) {
+                        newData = {...task, dueDate: data.newValue}
+                        return newData;
+                    } else return task;
+                })
+                break;
+        }
+
+        await fs.writeFile(dataFile, JSON.stringify(newTasks));
+
+        console.log("returned data ", newData)
+        res.status(200).json({message: 'task updated.', task: newData});
     }
 });
 
