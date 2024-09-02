@@ -37,6 +37,15 @@ export default function TaskList() {
                 const newProjects = allTasks.current.filter(project => project.status === 'new');
                 setTasks(newProjects);
                 break;
+                break;
+            case 'in progress':
+                const inProgressProjects = allTasks.current.filter(project => project.status === 'in progress');
+                setTasks(inProgressProjects);
+                break;
+            case 'done':
+                const completedProjects = allTasks.current.filter(project => project.status === 'done');
+                setTasks(completedProjects);
+                break;
             case 'high':
                 const highPriorityProjects = allTasks.current.filter(project => project.priority === 'high');
                 setTasks(highPriorityProjects);
@@ -71,6 +80,8 @@ export default function TaskList() {
                     <select className="text-cap" onChange={event => filterTasks(event)}>
                         <option value="all">all tasks</option>
                         <option value="new">new tasks</option>
+                        <option value="in progress">in progress tasks</option>
+                        <option value="done">completed tasks</option>
                         <option value="high">high priority tasks</option>
                         <option value="low">low priority tasks</option>
                         <option value="dueToday">due today</option>
