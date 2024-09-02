@@ -1,6 +1,6 @@
 import '../App.css';
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import {TaskContext} from "../store/TaskContext";
 import {FaEdit} from "react-icons/fa";
 
@@ -9,52 +9,15 @@ export default function TaskDetail() {
     const navigate = useNavigate();
     const params = useParams();
     const taskId = params.taskId;
-    const [task, setTask] = useState();
+    const [task, setTask] = useState(taskContext.items.find(task => task.id === taskId));
 
     const [changeTaskDueDate, setChangeTaskDueDate] = useState(false);
     const [changeTaskPriority, setChangeTaskPriority] = useState(false);
     const [changeTaskStatus, setChangeTaskStatus] = useState(false);
 
-    useEffect(() => {
-        fetch('http://localhost:3200/tasks/id/' + taskId).then(res => {
-            if (!res.ok) {
-                throw new Error("could not get task from backend");
-            }
-            console.log(res)
-            return res.json();
-        }).then(resData => {
-            console.log(resData)
-            setTask(resData.task);
-        })
-    }, []);
-
     function handleDelete() {
-        // taskContext.deleteItem(taskId);
         console.log("deleting")
-        const data = {
-            id: taskId
-        }
-        console.log(data)
-        fetch("http://localhost:3200/tasks/deletetask", {
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        ).then(res => {
-            console.log(res)
-            if (res.ok) {
-                console.log("task deleted.")
-                return res.json();
-            }
-
-        }).then(data => {
-            console.log(data);
-            navigate('/tasks');
-        }).catch(error => {
-            console.log(error)
-        })
+        taskContext.deleteItem(taskId);
     }
 
     function updateTaskDueDate(event) {

@@ -1,7 +1,9 @@
-import { createContext } from "react";
+import {createContext} from "react";
 
 export const TaskContext = createContext({
     items: [],
+    updateItems: () => {
+    },
     addItem: () => {
     },
     deleteItem: () => {
