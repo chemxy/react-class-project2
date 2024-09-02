@@ -61,7 +61,7 @@ export default function TaskDetail() {
         ).then(res => {
             // console.log(res)
             if (res.ok) {
-                console.log("task updated.")
+                console.log("task due date updated.")
                 return res.json();
             }
         }).then(data => {
@@ -91,13 +91,43 @@ export default function TaskDetail() {
         ).then(res => {
             // console.log(res)
             if (res.ok) {
-                console.log("task updated.")
+                console.log("task priority updated.")
                 return res.json();
             }
         }).then(data => {
             console.log(data);
             setTask(data.task);
             setChangeTaskPriority(false);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    function updateTaskStatus(event) {
+        const newValue = event.target.value;
+        console.log(newValue);
+        const body = {
+            id: task.id,
+            updateType: "status",
+            newValue: newValue
+        }
+        fetch("http://localhost:3200/tasks/updatetask", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            // console.log(res)
+            if (res.ok) {
+                console.log("task status updated.")
+                return res.json();
+            }
+        }).then(data => {
+            console.log(data);
+            setTask(data.task);
+            setChangeTaskStatus(false);
         }).catch(error => {
             console.log(error)
         })
@@ -127,6 +157,7 @@ export default function TaskDetail() {
                             <span> <input type="date" name="dueDate"
                                           onChange={(event) => updateTaskDueDate(event)}/></span>}
                     </h4>
+
                     <h4 className="text-cap">priority:
                         {!changeTaskPriority && <span> {task.priority}
                             <button className="icon-button">
@@ -136,15 +167,27 @@ export default function TaskDetail() {
                         }
 
                         {changeTaskPriority &&
-                            <span> <select className="text-cap" name="priority" defaultValue={task.priority === 'low' ? 'low' : 'high'}
+                            <span> <select className="text-cap" name="priority"
+                                           defaultValue={task.priority}
                                            onChange={(event) => updateTaskPriority(event)}>
                                     <option value="low">low</option>
                                     <option value="high">high</option>
                                 </select>
                             </span>}
                     </h4>
-                    <h4 className="text-cap">status: {task.status}
-                        <button className="icon-button"><FaEdit onClick={() => setChangeTaskStatus(true)}/></button>
+
+                    <h4 className="text-cap">status:
+                        {!changeTaskStatus && <span> {task.status}
+                            <button className="icon-button"><FaEdit onClick={() => setChangeTaskStatus(true)}/></button></span>}
+
+                        {changeTaskStatus && <span> <select className="text-cap" name="status"
+                                                            defaultValue={task.status}
+                                                            onChange={(event) => updateTaskStatus(event)}>
+                                    <option value="new">new</option>
+                                    <option value="in progress">in progress</option>
+                                    <option value="done">done</option>
+                            </select>
+                        </span>}
                     </h4>
                     <br/>
                     <p>{task.description}</p>

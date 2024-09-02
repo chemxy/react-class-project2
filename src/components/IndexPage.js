@@ -12,7 +12,7 @@ export default function IndexPage() {
     useEffect(() => {
         fetch('http://localhost:3200/tasks/all').then(res => {
             if (!res.ok) {
-                throw new Error("could not get projects from backend");
+                throw new Error("could not get tasks from backend");
             }
             console.log(res)
             return res.json();
@@ -22,7 +22,7 @@ export default function IndexPage() {
         })
     }, []);
 
-    function addProject(task) {
+    function addTask(task) {
         fetch('http://localhost:3200/tasks/addtask', {
             method: 'POST',
             body: JSON.stringify(task),
@@ -31,24 +31,23 @@ export default function IndexPage() {
             }
         }).then(res => {
             if (!res.ok) {
-                throw new Error("could not add projects to backend");
+                throw new Error("could not add tasks to backend");
             } else {
                 return res.json();
 
             }
         }).then(data => {
-            setTasks((prevProjects) => [...prevProjects, data.task]);
+            setTasks((prevTasks) => [...prevTasks, data.task]);
             navigate('/');
         }).catch(error => {
             console.log(error);
-            throw new Error("could not add projects to backend");
+            throw new Error("could not add tasks to backend");
         })
     }
 
-    function deleteProject(id) {
+    function deleteTask(id) {
         // console.log("deleting id:" + id);
 
-        // console.log(newProjects)
         console.log("deleting")
         const data = {
             id: id
@@ -64,14 +63,14 @@ export default function IndexPage() {
         ).then(res => {
             console.log(res)
             if (res.ok) {
-                console.log("project deleted.")
+                console.log("task deleted.")
                 return res.json();
             }
 
         }).then(data => {
             console.log(data);
-            const newProjects = tasks.filter((project) => project.id !== id);
-            setTasks(newProjects);
+            const newTasks = tasks.filter((task) => task.id !== id);
+            setTasks(newTasks);
             navigate('/');
         }).catch(error => {
             console.log(error)
@@ -79,14 +78,14 @@ export default function IndexPage() {
 
     }
 
-    const ProjectCtx = {
+    const TaskContextValue = {
         items: tasks,
-        addItem: addProject,
-        deleteItem: deleteProject,
+        addItem: addTask,
+        deleteItem: deleteTask,
     }
 
     return (
-        <TaskContext.Provider value={ProjectCtx}>
+        <TaskContext.Provider value={TaskContextValue}>
             <div className="App">
                 <div className="app-wrapper flex-row">
                     <div className="left">
