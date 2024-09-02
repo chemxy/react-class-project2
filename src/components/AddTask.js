@@ -4,7 +4,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 
 export default function AddTask() {
 
-    // const taskContext = useContext(TaskContext);
+    const taskContext = useContext(TaskContext);
     const navigate = useNavigate();
 
     function onAddTask(event) {
