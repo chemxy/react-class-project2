@@ -1,10 +1,7 @@
-import {useContext} from "react";
-import {TaskContext} from "../store/TaskContext";
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function AddTask() {
 
-    // const taskContext = useContext(TaskContext);
     const navigate = useNavigate();
 
     function onAddTask(event) {
@@ -16,7 +13,6 @@ export default function AddTask() {
         newTask.status = "new";
         newTask.createdDate = new Date().toISOString().split('T')[0]; // get today's date
         console.log(newTask)
-        // taskContext.addItem(newTask); //sync with project context and add task to backend
 
         fetch('http://localhost:3200/tasks/addtask', {
             method: 'POST',
@@ -32,7 +28,6 @@ export default function AddTask() {
 
             }
         }).then(data => {
-            // setTasks((prevTasks) => [...prevTasks, data.task]);
             navigate('/tasks');
         }).catch(error => {
             console.log(error);
