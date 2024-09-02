@@ -1,11 +1,9 @@
 import '../App.css';
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-import {TaskContext} from "../store/TaskContext";
+import {useEffect, useState} from "react";
 import {FaEdit} from "react-icons/fa";
 
 export default function TaskDetail() {
-    const taskContext = useContext(TaskContext);
     const navigate = useNavigate();
     const params = useParams();
     const taskId = params.taskId;
@@ -29,7 +27,6 @@ export default function TaskDetail() {
     }, []);
 
     function handleDelete() {
-        // taskContext.deleteItem(taskId);
         console.log("deleting")
         const data = {
             id: taskId

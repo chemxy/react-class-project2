@@ -1,13 +1,11 @@
 import '../App.css';
-import {useContext, useEffect, useState} from "react";
-import {TaskContext} from "../store/TaskContext";
+import {useEffect, useRef, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function TaskList() {
 
-    const taskContext = useContext(TaskContext)
     const navigate = useNavigate();
-
+    const allTasks = useRef([]);
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
@@ -20,6 +18,7 @@ export default function TaskList() {
         }).then(resData => {
             console.log(resData)
             setTasks(resData.tasks);
+            allTasks.current = resData.tasks;
         })
     }, []);
 
@@ -32,28 +31,28 @@ export default function TaskList() {
         const filterValue = event.target.value;
         switch (filterValue) {
             case 'all':
-                setTasks(taskContext.items);
+                setTasks(allTasks.current);
                 break;
             case 'new':
-                const newProjects = taskContext.items.filter(project => project.status === 'new');
+                const newProjects = allTasks.current.filter(project => project.status === 'new');
                 setTasks(newProjects);
                 break;
             case 'high':
-                const highPriorityProjects = taskContext.items.filter(project => project.priority === 'high');
+                const highPriorityProjects = allTasks.current.filter(project => project.priority === 'high');
                 setTasks(highPriorityProjects);
                 break;
             case 'low':
-                const lowPriorityProjects = taskContext.items.filter(project => project.priority === 'low');
+                const lowPriorityProjects = allTasks.current.filter(project => project.priority === 'low');
                 setTasks(lowPriorityProjects);
                 break;
             case 'dueToday':
-                const todayTasks = taskContext.items.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === new Date().toDateString());
+                const todayTasks = allTasks.current.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === new Date().toDateString());
                 setTasks(todayTasks);
                 break;
             case 'dueTomorrow':
                 let tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1)
-                const tomorrowTasks = taskContext.items.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === tomorrow.toDateString());
+                const tomorrowTasks = allTasks.current.filter(task => new Date(task.dueDate + "GMT-07:00").toDateString() === tomorrow.toDateString());
                 setTasks(tomorrowTasks);
                 break;
         }
