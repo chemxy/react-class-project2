@@ -1,10 +1,11 @@
 import {useContext} from "react";
 import {TaskContext} from "../store/TaskContext";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export default function AddTask() {
 
-    const taskContext = useContext(TaskContext);
+    // const taskContext = useContext(TaskContext);
+    const navigate = useNavigate();
 
     function onAddTask(event) {
         event.preventDefault();
@@ -15,7 +16,28 @@ export default function AddTask() {
         newTask.status = "new";
         newTask.createdDate = new Date().toISOString().split('T')[0]; // get today's date
         console.log(newTask)
-        taskContext.addItem(newTask); //sync with project context and add task to backend
+        // taskContext.addItem(newTask); //sync with project context and add task to backend
+
+        fetch('http://localhost:3200/tasks/addtask', {
+            method: 'POST',
+            body: JSON.stringify(newTask),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error("could not add tasks to backend");
+            } else {
+                return res.json();
+
+            }
+        }).then(data => {
+            // setTasks((prevTasks) => [...prevTasks, data.task]);
+            navigate('/tasks');
+        }).catch(error => {
+            console.log(error);
+            throw new Error("could not add tasks to backend");
+        })
     }
 
     return <div>

@@ -11,9 +11,17 @@ export default function TaskList() {
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-        console.log(taskContext.items)
-        setTasks(taskContext.items);
-    }, [taskContext.items]);
+        fetch('http://localhost:3200/tasks/all').then(res => {
+            if (!res.ok) {
+                throw new Error("could not get tasks from backend");
+            }
+            console.log(res)
+            return res.json();
+        }).then(resData => {
+            console.log(resData)
+            setTasks(resData.tasks);
+        })
+    }, []);
 
     function onSelectTask(id) {
         navigate(`${id}`);

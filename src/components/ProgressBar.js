@@ -20,7 +20,7 @@ export default function ProgessBar({newTasks, allTasks}) {
             <text x={circle.diameter * 0.9}
                   y={circle.diameter * 1.05}
                   fontSize={24}>
-                {(1 - newTasks / allTasks) * 100} %
+                {((1 - newTasks / allTasks) * 100).toFixed(2) } %
             </text>
         </svg>
     </>
