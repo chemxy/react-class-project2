@@ -10,7 +10,6 @@ export default function TaskList() {
 
     const [tasks, setTasks] = useState(taskContext.items)
 
-
     function onSelectTask(id) {
         navigate(`${id}`);
     }
