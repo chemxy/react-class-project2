@@ -1,10 +1,12 @@
 import '../App.css';
 import DashboardSmallCell from "./DashboardSmallCell";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ProgessBar from "./ProgressBar";
+import {TaskContext} from "../store/TaskContext";
 
 export default function Dashboard() {
 
+    const taskContext = useContext(TaskContext);
     const [dashboardStats, setDashboardStats] = useState({
         allTasks: 0,
         newTasks: 0,
@@ -16,20 +18,24 @@ export default function Dashboard() {
 
 
     useEffect(() => {
-        fetch('http://localhost:3200/tasks/count').then(res => {
-            return res.json();
-        }).then(resData => {
-            // console.log(resData)
-            setDashboardStats({
-                ...dashboardStats,
-                allTasks: resData.all,
-                newTasks: resData.new,
-                inProgressTasks: resData.inProgress,
-                doneTasks: resData.done,
-                tasksDueToday: resData.dueToday,
-                taskDueTomorrow: resData.dueTomorrow
-            });
-        })
+
+        let newTasks = taskContext.items.filter(task => task.status === "new").length;
+        let inProgressTasks = taskContext.items.filter(task => task.status === "in progress").length;
+        let doneTasks = taskContext.items.filter(task => task.status === "done").length;
+        let taskDueToday = taskContext.items.filter(task => new Date(task.dueDate).toDateString() === new Date().toDateString()).length;
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        let taskDueTomorrow = taskContext.items.filter(task => new Date(task.dueDate).toDateString() === tomorrow.toDateString()).length;
+
+        setDashboardStats({
+            ...dashboardStats,
+            allTasks: taskContext.items.length,
+            newTasks: newTasks,
+            inProgressTasks: inProgressTasks,
+            doneTasks: doneTasks,
+            tasksDueToday: taskDueToday,
+            taskDueTomorrow: taskDueTomorrow
+        });
     }, []);
 
 
