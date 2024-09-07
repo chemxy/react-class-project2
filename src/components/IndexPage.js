@@ -6,21 +6,7 @@ import NavBar from "./NavBar";
 
 export default function IndexPage() {
 
-    // const navigate = useNavigate();
     const [tasks, setTasks] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('http://localhost:3200/tasks/all').then(res => {
-    //         if (!res.ok) {
-    //             throw new Error("could not get tasks from backend");
-    //         }
-    //         console.log(res)
-    //         return res.json();
-    //     }).then(resData => {
-    //         console.log(resData)
-    //         setTasks(resData.tasks);
-    //     })
-    // }, []);
 
     function updateTasks(newTasks) {
         setTasks(newTasks);

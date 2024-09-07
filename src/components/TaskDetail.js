@@ -5,6 +5,7 @@ import {TaskContext} from "../store/TaskContext";
 import {FaEdit} from "react-icons/fa";
 
 export default function TaskDetail() {
+
     const taskContext = useContext(TaskContext);
     const navigate = useNavigate();
     const params = useParams();
@@ -23,91 +24,47 @@ export default function TaskDetail() {
     function updateTaskDueDate(event) {
         const newValue = event.target.value;
         console.log(newValue);
-        const body = {
-            id: task.id,
-            updateType: "dueDate",
-            newValue: newValue
-        }
-        fetch("http://localhost:3200/tasks/updatetask", {
-                method: "POST",
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        ).then(res => {
-            // console.log(res)
-            if (res.ok) {
-                console.log("task due date updated.")
-                return res.json();
-            }
-        }).then(data => {
-            console.log(data);
-            setTask(data.task);
-            setChangeTaskDueDate(false);
-        }).catch(error => {
-            console.log(error)
+        let newTask = {...task, dueDate: newValue}
+        let newTasks = taskContext.items.map(item => {
+            if (item.id === task.id) {
+                return newTask;
+            } else
+                return task;
         })
+        setTask(newTask);
+        taskContext.updateItems(newTasks);
+        setChangeTaskDueDate(false);
+
     }
 
     function updateTaskPriority(event) {
         const newValue = event.target.value;
         console.log(newValue);
-        const body = {
-            id: task.id,
-            updateType: "priority",
-            newValue: newValue
-        }
-        fetch("http://localhost:3200/tasks/updatetask", {
-                method: "POST",
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        ).then(res => {
-            // console.log(res)
-            if (res.ok) {
-                console.log("task priority updated.")
-                return res.json();
-            }
-        }).then(data => {
-            console.log(data);
-            setTask(data.task);
-            setChangeTaskPriority(false);
-        }).catch(error => {
-            console.log(error)
+        let newTask = {...task, priority: newValue}
+        let newTasks = taskContext.items.map(item => {
+            if (item.id === task.id) {
+                return newTask;
+            } else
+                return task;
         })
+        setTask(newTask);
+        taskContext.updateItems(newTasks);
+        setChangeTaskPriority(false);
     }
 
     function updateTaskStatus(event) {
         const newValue = event.target.value;
         console.log(newValue);
-        const body = {
-            id: task.id,
-            updateType: "status",
-            newValue: newValue
-        }
-        fetch("http://localhost:3200/tasks/updatetask", {
-                method: "POST",
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        ).then(res => {
-            // console.log(res)
-            if (res.ok) {
-                console.log("task status updated.")
-                return res.json();
-            }
-        }).then(data => {
-            console.log(data);
-            setTask(data.task);
-            setChangeTaskStatus(false);
-        }).catch(error => {
-            console.log(error)
+        let newTask = {...task, status: newValue}
+        let newTasks = taskContext.items.map(item => {
+            if (item.id === task.id) {
+                return newTask;
+            } else
+                return task;
         })
+        setTask(newTask);
+        taskContext.updateItems(newTasks);
+        setChangeTaskStatus(false);
     }
 
     if (task) {

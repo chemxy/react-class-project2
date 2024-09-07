@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {TaskContext} from "../store/TaskContext";
 import {NavLink, useNavigate} from "react-router-dom";
+import {v4 as uuid} from "uuid";
 
 export default function AddTask() {
 
@@ -13,6 +14,7 @@ export default function AddTask() {
         const newTask = Object.fromEntries(fd.entries());
 
         //add meta data
+        newTask.id = uuid();
         newTask.status = "new";
         newTask.createdDate = new Date().toISOString().split('T')[0]; // get today's date
         console.log(newTask)
